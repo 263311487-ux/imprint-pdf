@@ -28,7 +28,7 @@ imprint paper.md
 
 # Common commands
 npx imprint-pdf --new report        # scaffold from a template
-npx imprint-pdf --list-themes       # all 22 themes
+npx imprint-pdf --list-themes       # all 24 themes
 npx imprint-pdf paper.md --theme academic --out paper.pdf
 ```
 
@@ -92,8 +92,8 @@ Every run ends with a quality report:
 ## Features
 
 - **Cover + TOC** — frontmatter `title / author / date` builds a cover; headings become a clickable TOC with page numbers that actually match
-- **Smart theming** — pick a theme explicitly, or let Imprint read the document and recommend one (with the reason why); 20 themes, including a dark one
-- **Theme gallery** — modern / academic / nord / sepia / newspaper / catppuccin / mono / jade / coffee / ocean / lavender / rose / pine / wine / graphite / midnight (dark) / coral / amber / mint / sand / minimal / ink (thread-bound book, rice paper + seal red); custom themes are a single JSON file
+- **Smart theming** — pick a theme explicitly, or let Imprint read the document and recommend one (with the reason why); 24 themes, including a dark one
+- **Theme gallery** — modern / academic / nord / sepia / newspaper / catppuccin / mono / jade / coffee / ocean / lavender / rose / pine / wine / graphite / midnight (dark) / coral / amber / mint / sand / minimal / ink (thread-bound book, rice paper + seal red) / gongwen (red-header official document) / ieee (English two-column paper); custom themes are a single JSON file
 - **GitHub-style alerts** — `> [!NOTE]` / `[!TIP]` / `[!WARNING]` / `[!IMPORTANT]` / `[!CAUTION]` render as print-grade callout cards
 - **Mermaid diagrams** — ` ```mermaid ` fences render to vector images (Chinese labels included); graceful code-block fallback when the engine is missing
 - **Math** — `$inline$` / `$$block$$` become vector SVG via matplotlib mathtext; no LaTeX or math fonts required
@@ -153,7 +153,7 @@ CI runs pytest on macOS / Linux / Windows × Python 3.10–3.12.
 
 ## Roadmap
 
-- More themes: minimal / ink
+- More themes: 24 live today — incl. gongwen and ieee
 - npm distribution (`npx imprint`)
 - Two-column / academic template enhancements
 

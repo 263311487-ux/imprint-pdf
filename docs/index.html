@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imprint — Markdown in, publisher-grade PDF out</title>
+<meta name="description" content="AI-native, print-grade PDF generator. Markdown in, publisher-quality PDF out, with an automated 0-100 print-quality report. 24 themes, 8 templates, MCP-ready.">
+<style>
+:root{
+  --bg:#0b1020; --bg2:#0f1630; --card:#141c38; --card2:#1a2444;
+  --line:rgba(148,163,184,.18); --line2:rgba(148,163,184,.32);
+  --text:#e7ecf7; --muted:#9aa7c7; --dim:#6b7aa0;
+  --accent:#6ea8ff; --accent2:#8b7bff; --teal:#3dd6c0; --gold:#ffd479;
+  --ok:#4ade80; --warn:#fbbf24; --err:#f87171;
+  --serif:Georgia,"Times New Roman","Songti SC","STSong",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+section{padding:88px 0;border-top:1px solid var(--line)}
+h2{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.01em;margin-bottom:14px}
+.lead{color:var(--muted);font-size:17px;max-width:720px;margin-bottom:44px}
+.sec-kicker{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:10px}
+.tag-cn{color:var(--dim);font-size:13px}
+code,.code{font-family:var(--mono);font-size:.92em}
+
+/* hero */
+.hero{position:relative;padding:120px 0 100px;overflow:hidden;border-top:none}
+.hero::before{content:"";position:absolute;inset:0;background:
+ radial-gradient(600px 300px at 20% 0%,rgba(110,168,255,.16),transparent 60%),
+ radial-gradient(700px 380px at 85% 15%,rgba(139,123,255,.14),transparent 60%),
+ radial-gradient(500px 300px at 50% 110%,rgba(61,214,192,.08),transparent 60%);
+ pointer-events:none}
+.hero-inner{position:relative}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.badge{font-size:12.5px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--muted)}
+.badge b{color:var(--text)}
+h1{font-family:var(--serif);font-size:clamp(40px,6.5vw,72px);line-height:1.06;font-weight:700;letter-spacing:-.02em;margin-bottom:22px}
+h1 .grad{background:linear-gradient(92deg,var(--accent),var(--accent2) 55%,var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:760px;margin-bottom:14px}
+.hero-sub b{color:var(--text)}
+.hero-cn{color:var(--dim);font-size:14.5px;margin-bottom:40px}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:13px 24px;border-radius:12px;border:1px solid transparent;cursor:pointer;transition:transform .15s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-1px);text-decoration:none}
+.btn-primary{background:linear-gradient(92deg,var(--accent),var(--accent2));color:#0b1020;box-shadow:0 8px 30px rgba(110,168,255,.25)}
+.btn-ghost{border-color:var(--line2);color:var(--text);background:rgba(255,255,255,.03)}
+.terminal{background:#070b18;border:1px solid var(--line2);border-radius:14px;padding:18px 22px;max-width:720px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.terminal .dots{display:flex;gap:6px;margin-bottom:12px}
+.terminal .dots span{width:11px;height:11px;border-radius:50%;display:block}
+.terminal .dots span:nth-child(1){background:#ff5f57}.terminal .dots span:nth-child(2){background:#febc2e}.terminal .dots span:nth-child(3){background:#28c840}
+.terminal code{display:block;color:#cfe0ff;font-size:14px;white-space:pre-wrap}
+.terminal .cmt{color:#5d6b8f}
+.terminal .out{color:var(--muted);font-size:13px}
+.terminal .out b{color:var(--text)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 20px;text-align:center}
+.stat .num{font-family:var(--serif);font-size:42px;font-weight:700;background:linear-gradient(92deg,var(--accent),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lab{color:var(--muted);font-size:13.5px;margin-top:6px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;position:relative}
+.step .n{font-family:var(--serif);font-size:30px;font-weight:700;color:var(--teal);margin-bottom:10px}
+.step h3{font-size:17px;margin-bottom:8px}
+.step p{color:var(--muted);font-size:14.5px}
+.step code{color:#cfe0ff;background:rgba(110,168,255,.1);padding:1px 6px;border-radius:6px}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.t{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .18s ease,border-color .18s ease}
+.t:hover{transform:translateY(-3px);border-color:var(--line2)}
+.t img{width:100%;display:block;aspect-ratio:910/1287;object-fit:cover;background:#fff}
+.t .tn{font-size:12.5px;color:var(--muted);padding:8px 12px;display:flex;justify-content:space-between;align-items:center}
+.t .tn b{color:var(--text);font-weight:600}
+.t .tn .cn{color:var(--dim);font-size:11px}
+
+/* templates */
+.tpl{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.tp{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;transition:border-color .18s ease,transform .18s ease}
+.tp:hover{border-color:var(--line2);transform:translateY(-2px)}
+.tp .ic{font-size:24px;margin-bottom:10px}
+.tp h3{font-size:15.5px;margin-bottom:4px}
+.tp p{color:var(--muted);font-size:13px}
+.tp code{font-size:11.5px;color:var(--teal)}
+
+/* checks */
+.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.ck{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.ck .mark{color:var(--ok);font-weight:700;font-size:15px;margin-top:1px}
+.ck b{font-size:14.5px;display:block}
+.ck span{color:var(--muted);font-size:13px}
+
+/* samples */
+.samples{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.smp{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;color:var(--text);transition:border-color .18s ease,transform .18s ease}
+.smp:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+.smp .icon{font-size:26px;margin-bottom:10px}
+.smp b{display:block;font-size:15.5px;margin-bottom:3px}
+.smp span{color:var(--muted);font-size:13px}
+.smp .score{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;color:var(--ok);border:1px solid rgba(74,222,128,.35);padding:2px 10px;border-radius:999px}
+
+/* compare */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase}
+td.dim{color:var(--dim)}
+td.ok{color:var(--ok);font-weight:700}
+td.imp{color:var(--gold);font-weight:700}
+tr:last-child td{border-bottom:none}
+
+/* ai */
+.ai-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;align-items:start}
+.ai-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+.ai-card h3{font-size:18px;margin-bottom:10px}
+.ai-card p{color:var(--muted);font-size:14.5px;margin-bottom:14px}
+.ai-card code{color:#cfe0ff;background:rgba(110,168,255,.1);padding:1px 6px;border-radius:6px}
+.ai-card ul{list-style:none;margin-top:8px}
+.ai-card li{color:var(--muted);font-size:14px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.ai-card li:last-child{border-bottom:none}
+.ai-card li b{color:var(--text)}
+
+/* quickstart */
+.qs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.qs-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.qs-card h3{font-size:17px;margin-bottom:12px}
+.qs-card pre{background:#070b18;border:1px solid var(--line2);border-radius:12px;padding:16px;font-size:13px;overflow-x:auto;color:#cfe0ff}
+.qs-card pre code{white-space:pre}
+.copy{position:relative}
+.copy button{position:absolute;top:10px;right:10px;font-size:11px;color:var(--muted);background:rgba(255,255,255,.06);border:1px solid var(--line2);border-radius:8px;padding:4px 10px;cursor:pointer}
+.copy button:hover{color:var(--text)}
+
+/* faq */
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:12px}
+.faq summary{cursor:pointer;font-weight:600;font-size:15.5px}
+.faq summary::marker{color:var(--teal)}
+.faq details p{color:var(--muted);font-size:14.5px;margin-top:12px}
+
+/* footer */
+footer{padding:56px 0 80px;border-top:1px solid var(--line);color:var(--dim);font-size:13.5px}
+footer .links{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:16px}
+footer a{color:var(--muted)}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:900px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .steps,.tpl,.samples,.qs,.ai-grid{grid-template-columns:1fr}
+  .checks{grid-template-columns:1fr}
+  .gal{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+  section{padding:64px 0}
+  .hero{padding:80px 0 70px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="badges reveal">
+      <span class="badge">npm <b>imprint-pdf</b></span>
+      <span class="badge">24 themes</span>
+      <span class="badge">8 templates</span>
+      <span class="badge">14 automated checks</span>
+      <span class="badge">0–100 print score</span>
+      <span class="badge">MCP-ready</span>
+    </div>
+    <h1 class="reveal">Markdown in.<br><span class="grad">Publisher-grade PDF out.</span></h1>
+    <p class="hero-sub reveal">Imprint treats Markdown as the <b>draft</b> and the PDF as the <b>finished product</b>. It typesets like a publishing house — serif body, first-line indents, kinsoku punctuation rules, exact TOC page numbers, repeating table headers — then scores every PDF <b>0–100</b> with evidence for each check.</p>
+    <p class="hero-cn reveal">中文印刷级排版 · 24 套主题 · 8 套模板 · 自带 0–100 质检报告 · 一个命令出片</p>
+    <div class="cta-row reveal">
+      <a class="btn btn-primary" href="https://github.com/263311487-ux/imprint-pdf" target="_blank" rel="noopener">★ Star on GitHub</a>
+      <a class="btn btn-ghost" href="https://www.npmjs.com/package/imprint-pdf" target="_blank" rel="noopener">View on npm</a>
+    </div>
+    <div class="terminal reveal">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <code><span class="cmt"># One command. No config. Cross-platform.</span>
+$ npx imprint-pdf paper.md
+<span class="out">✓ 文本可选 15.0/15.0 · 字体嵌入 10.0/10.0 · 标点避头尾 10.0/10.0 · 目录页码 10.0/10.0 …
+✓ <b>总分 100.0/100 · 等级 A+ · 9 页</b></span></code>
+    </div>
+  </div>
+</header>
+
+<section id="stats">
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><div class="num">24</div><div class="lab">design-system themes</div></div>
+      <div class="stat"><div class="num">8</div><div class="lab">built-in templates</div></div>
+      <div class="stat"><div class="num">14</div><div class="lab">automated quality checks</div></div>
+      <div class="stat"><div class="num">0–100</div><div class="lab">print-quality score, with evidence</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-kicker reveal">How it works</div>
+    <h2 class="reveal">From draft to finished document</h2>
+    <p class="lead reveal">Imprint is built for the AI-native workflow: you keep writing in Markdown, it handles everything that makes a document feel <em>printed</em>, and it proves the result with a machine-readable quality report.</p>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="n">01</div>
+        <h3>Write Markdown</h3>
+        <p>Frontmatter sets <code>title / author / theme / layout</code>. Cover and clickable TOC are generated automatically.</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h3>Imprint typesets it</h3>
+        <p>Publisher rules: 2-em first-line indents, kinsoku line-breaking, widow/orphan control, cross-page tables with repeated headers, vector math &amp; Mermaid charts.</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h3>It scores itself 0–100</h3>
+        <p>14 checks — fonts, metadata, punctuation, TOC accuracy, contrast, glyphs, overflow, image DPI, PDF/UA tags — each with evidence, printed to your terminal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="themes">
+  <div class="wrap">
+    <div class="sec-kicker reveal">Design system themes</div>
+    <h2 class="reveal">24 themes. Every one passes print quality checks.</h2>
+    <p class="lead reveal">Each theme is a set of DTCG design tokens — palette, type pairing, spacing, decoration. Every theme passes automated WCAG print-contrast checks (body ≥ 7:1, small text ≥ 4.5:1). All thumbnails below are real rendered pages.</p>
+    <div class="gal reveal">
+      <div class="t"><img src="../examples/qa/modern-01.png" alt="modern theme" loading="lazy"><div class="tn"><b>modern</b><span class="cn">现代杂志</span></div></div>
+      <div class="t"><img src="../examples/qa/academic-01.png" alt="academic theme" loading="lazy"><div class="tn"><b>academic</b><span class="cn">学术书卷</span></div></div>
+      <div class="t"><img src="../examples/qa/nord-01.png" alt="nord theme" loading="lazy"><div class="tn"><b>nord</b><span class="cn">北欧极简</span></div></div>
+      <div class="t"><img src="../examples/qa/sepia-01.png" alt="sepia theme" loading="lazy"><div class="tn"><b>sepia</b><span class="cn">护眼纸色</span></div></div>
+      <div class="t"><img src="../examples/qa/newspaper-01.png" alt="newspaper theme" loading="lazy"><div class="tn"><b>newspaper</b><span class="cn">报纸头版</span></div></div>
+      <div class="t"><img src="../examples/qa/catppuccin-01.png" alt="catppuccin theme" loading="lazy"><div class="tn"><b>catppuccin</b><span class="cn">柔和粉彩</span></div></div>
+      <div class="t"><img src="../examples/qa/mono-01.png" alt="mono theme" loading="lazy"><div class="tn"><b>mono</b><span class="cn">纯黑白</span></div></div>
+      <div class="t"><img src="../examples/qa/jade-01.png" alt="jade theme" loading="lazy"><div class="tn"><b>jade</b><span class="cn">玉石绿</span></div></div>
+      <div class="t"><img src="../examples/qa/coffee-01.png" alt="coffee theme" loading="lazy"><div class="tn"><b>coffee</b><span class="cn">咖啡暖棕</span></div></div>
+      <div class="t"><img src="../examples/qa/ocean-01.png" alt="ocean theme" loading="lazy"><div class="tn"><b>ocean</b><span class="cn">海洋蓝</span></div></div>
+      <div class="t"><img src="../examples/qa/lavender-01.png" alt="lavender theme" loading="lazy"><div class="tn"><b>lavender</b><span class="cn">薰衣草紫</span></div></div>
+      <div class="t"><img src="../examples/qa/rose-01.png" alt="rose theme" loading="lazy"><div class="tn"><b>rose</b><span class="cn">樱粉</span></div></div>
+      <div class="t"><img src="../examples/qa/pine-01.png" alt="pine theme" loading="lazy"><div class="tn"><b>pine</b><span class="cn">松林绿</span></div></div>
+      <div class="t"><img src="../examples/qa/wine-01.png" alt="wine theme" loading="lazy"><div class="tn"><b>wine</b><span class="cn">勃艮第酒红</span></div></div>
+      <div class="t"><img src="../examples/qa/graphite-01.png" alt="graphite theme" loading="lazy"><div class="tn"><b>graphite</b><span class="cn">石墨灰</span></div></div>
+      <div class="t"><img src="../examples/qa/midnight-01.png" alt="midnight theme" loading="lazy"><div class="tn"><b>midnight</b><span class="cn">深夜蓝纸</span></div></div>
+      <div class="t"><img src="../examples/qa/coral-01.png" alt="coral theme" loading="lazy"><div class="tn"><b>coral</b><span class="cn">珊瑚橙</span></div></div>
+      <div class="t"><img src="../examples/qa/amber-01.png" alt="amber theme" loading="lazy"><div class="tn"><b>amber</b><span class="cn">琥珀金</span></div></div>
+      <div class="t"><img src="../examples/qa/mint-01.png" alt="mint theme" loading="lazy"><div class="tn"><b>mint</b><span class="cn">薄荷青</span></div></div>
+      <div class="t"><img src="../examples/qa/sand-01.png" alt="sand theme" loading="lazy"><div class="tn"><b>sand</b><span class="cn">沙漠沙色</span></div></div>
+      <div class="t"><img src="../examples/qa/minimal-01.png" alt="minimal theme" loading="lazy"><div class="tn"><b>minimal</b><span class="cn">极简</span></div></div>
+      <div class="t"><img src="../examples/qa/ink-01.png" alt="ink theme" loading="lazy"><div class="tn"><b>ink</b><span class="cn">线装书</span></div></div>
+      <div class="t"><img src="../examples/qa/gongwen-01.png" alt="gongwen theme" loading="lazy"><div class="tn"><b>gongwen</b><span class="cn">红头公文</span></div></div>
+      <div class="t"><img src="../examples/qa/ieee-03.png" alt="ieee theme" loading="lazy"><div class="tn"><b>ieee</b><span class="cn">英文论文</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="templates">
+  <div class="wrap">
+    <div class="sec-kicker reveal">Templates</div>
+    <h2 class="reveal">Eight templates. One command to scaffold.</h2>
+    <p class="lead reveal">Each template ships with its own typographic personality — <code>imprint --new report</code> gives you a graphite-gray business report; <code>--new gongwen</code> a GB/T 9704 red-header official document; <code>--new ieee</code> an English two-column IEEE-style paper.</p>
+    <div class="tpl reveal">
+      <div class="tp"><div class="ic">📘</div><h3>report</h3><p>Graphite-gray business report</p><code>--new report</code></div>
+      <div class="tp"><div class="ic">📖</div><h3>book</h3><p>Rice-paper book manuscript</p><code>--new book</code></div>
+      <div class="tp"><div class="ic">📄</div><h3>resume</h3><p>Monospace CV, one page</p><code>--new resume</code></div>
+      <div class="tp"><div class="ic">🛠️</div><h3>techdoc</h3><p>Ocean-blue technical doc</p><code>--new techdoc</code></div>
+      <div class="tp"><div class="ic">✉️</div><h3>letter</h3><p>Lavender formal letter</p><code>--new letter</code></div>
+      <div class="tp"><div class="ic">🎓</div><h3>paper</h3><p>Two-column academic paper</p><code>--new paper</code></div>
+      <div class="tp"><div class="ic">🏛️</div><h3>gongwen</h3><p>Red-header official document</p><code>--new gongwen</code></div>
+      <div class="tp"><div class="ic">🌐</div><h3>ieee</h3><p>IEEE-style English paper</p><code>--new ieee</code></div>
+    </div>
+  </div>
+</section>
+
+<section id="quality">
+  <div class="wrap">
+    <div class="sec-kicker reveal">The quality gate</div>
+    <h2 class="reveal">A PDF is finished when it scores itself.</h2>
+    <p class="lead reveal">Every render runs 14 automated checks and prints a 0–100 report. No silent PDFs. You always know exactly what passed, what didn't, and why.</p>
+    <div class="checks reveal">
+      <div class="ck"><span class="mark">✓</span><div><b>Text is selectable</b><span>Never a scanned image pretending to be a document.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>Fonts are subset-embedded</b><span>Renders correctly on any machine.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>Metadata complete</b><span>Title, author and dates set in the file.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>Kinsoku punctuation rules</b><span>No punctuation at the start of a line.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>No widows / orphans</b><span>Headings and lines never dangle.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>TOC page numbers exact</b><span>Clickable entries match real pages.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>Page numbers correct</b><span>Every page, in order.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>PDF/UA accessibility tags</b><span>Screen-reader friendly by default.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>File size sane</b><span>No accidental 200 MB exports.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>Theme fonts really used</b><span>The design system is honored in the output.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>WCAG contrast</b><span>Body ≥ 7:1, small text ≥ 4.5:1, decorative ≥ 3:1.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>No missing glyphs</b><span>LastResort / tofu blocks are detected and surfaced.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>No content overflow</b><span>Nothing spills past the page.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>Image DPI sufficient</b><span>Prints crisp, never pixelated.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="samples">
+  <div class="wrap">
+    <div class="sec-kicker reveal">See it in the wild</div>
+    <h2 class="reveal">Real PDFs, produced by Imprint.</h2>
+    <p class="lead reveal">These files were generated by Imprint itself and scored by its own validator. Download and open them — the quality report is reproducible on your machine.</p>
+    <div class="samples reveal">
+      <a class="smp" href="https://github.com/263311487-ux/imprint-pdf/releases/download/v0.11.0/imprint-ieee-100.pdf" target="_blank" rel="noopener"><div class="icon">🌐</div><b>IEEE English paper</b><span>Two-column, Times 10pt, English.</span><span class="score">100 / 100</span></a>
+      <a class="smp" href="https://github.com/263311487-ux/imprint-pdf/releases/download/v0.10.0/imprint-gongwen-97.pdf" target="_blank" rel="noopener"><div class="icon">🏛️</div><b>Red-header official doc</b><span>GB/T 9704. Missing FangSong font on macOS costs 3 pts — honest.</span><span class="score">97 / 100</span></a>
+      <a class="smp" href="https://github.com/263311487-ux/imprint-pdf/releases/download/v0.9.0/imprint-paper-twocolumn-100.pdf" target="_blank" rel="noopener"><div class="icon">🎓</div><b>Two-column academic paper</b><span>Abstract, keywords, inline math.</span><span class="score">100 / 100</span></a>
+      <a class="smp" href="https://github.com/263311487-ux/imprint-pdf/releases/download/v0.8.0/imprint-sample-100-100.pdf" target="_blank" rel="noopener"><div class="icon">📘</div><b>Signature sample</b><span>The original 9-page showcase.</span><span class="score">100 / 100</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="sec-kicker reveal">Why Imprint</div>
+    <h2 class="reveal">Compared to the usual suspects</h2>
+    <div class="reveal" style="overflow-x:auto">
+    <table>
+      <tr><th></th><th>Pandoc + LaTeX</th><th>Word / Docs</th><th>Typst</th><th>Browser print</th><th>Imprint</th></tr>
+      <tr><td>Print-grade CJK typography</td><td class="dim">manual</td><td class="dim">manual</td><td class="dim">partial</td><td class="dim">weak</td><td class="imp">by default</td></tr>
+      <tr><td>Chinese kinsoku &amp; indents</td><td class="dim">pkg-setup</td><td class="dim">manual</td><td class="dim">partial</td><td class="dim">weak</td><td class="imp">automatic</td></tr>
+      <tr><td>Design-system theming</td><td class="dim">no</td><td class="dim">no</td><td class="dim">partial</td><td class="dim">no</td><td class="imp">24 themes</td></tr>
+      <tr><td>Automated 0–100 quality report</td><td class="dim">no</td><td class="dim">no</td><td class="dim">no</td><td class="dim">no</td><td class="imp">14 checks</td></tr>
+      <tr><td>Vector math &amp; Mermaid</td><td class="ok">math only</td><td class="dim">no</td><td class="ok">math only</td><td class="dim">no</td><td class="imp">both</td></tr>
+      <tr><td>One-command from Markdown</td><td class="dim">pipeline</td><td class="dim">no</td><td class="dim">no</td><td class="ok">yes</td><td class="imp">npx one-liner</td></tr>
+      <tr><td>PDF/UA accessibility</td><td class="dim">manual</td><td class="dim">manual</td><td class="dim">no</td><td class="dim">no</td><td class="imp">default</td></tr>
+      <tr><td>AI-agent ready (MCP server)</td><td class="dim">no</td><td class="dim">no</td><td class="dim">no</td><td class="dim">no</td><td class="imp">built-in</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="ai">
+  <div class="wrap">
+    <div class="sec-kicker reveal">Built for AI agents</div>
+    <h2 class="reveal">From one sentence to a finished PDF.</h2>
+    <div class="ai-grid reveal">
+      <div class="ai-card">
+        <h3>MCP server, built in</h3>
+        <p>Imprint ships an MCP server (<code>imprint-mcp</code>) with four tools: <code>render_markdown</code>, <code>list_themes</code>, <code>validate_pdf</code>, <code>new_document</code>. Point Claude, Codex, Cursor or any MCP client at it and agents can produce print-grade PDFs directly.</p>
+        <pre style="background:#070b18;border:1px solid var(--line2);border-radius:12px;padding:14px;font-size:12.5px;color:#cfe0ff;overflow-x:auto"><code>pip install "imprint-pdf[mcp]"
+imprint-mcp            # stdio MCP server</code></pre>
+      </div>
+      <div class="ai-card">
+        <h3>One command, anywhere</h3>
+        <p>The npm wrapper auto-installs the engine on first run (PyPI, with a GitHub fallback), so <code>npx imprint-pdf</code> works on any machine with Node — no Python setup needed.</p>
+        <ul>
+          <li><b>npx</b> — <code>npx imprint-pdf paper.md</code></li>
+          <li><b>pip</b> — <code>pip install imprint-pdf</code></li>
+          <li><b>MCP</b> — <code>pip install "imprint-pdf[mcp]"</code></li>
+          <li><b>Smart skin</b> — theme auto-recommended from content</li>
+          <li><b>Honest fonts</b> — warns when a font is missing, never silently substitutes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quickstart">
+  <div class="wrap">
+    <div class="sec-kicker reveal">Quick start</div>
+    <h2 class="reveal">Up and running in 30 seconds.</h2>
+    <div class="qs reveal">
+      <div class="qs-card copy">
+        <h3>Generate</h3>
+        <button onclick="copy(this)">copy</button>
+        <pre><code>npx imprint-pdf paper.md --out paper.pdf</code></pre>
+      </div>
+      <div class="qs-card copy">
+        <h3>Scaffold a template</h3>
+        <button onclick="copy(this)">copy</button>
+        <pre><code>npx imprint-pdf --new report</code></pre>
+      </div>
+      <div class="qs-card copy">
+        <h3>Pick a theme</h3>
+        <button onclick="copy(this)">copy</button>
+        <pre><code>npx imprint-pdf paper.md --theme academic</code></pre>
+      </div>
+      <div class="qs-card copy">
+        <h3>Full quality report</h3>
+        <button onclick="copy(this)">copy</button>
+        <pre><code>npx imprint-pdf paper.md --validate --verbose</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq">
+  <div class="wrap">
+    <div class="sec-kicker reveal">FAQ</div>
+    <h2 class="reveal">Questions, answered honestly.</h2>
+    <div class="reveal">
+      <details>
+        <summary>What makes Imprint different from a Markdown-to-PDF converter?</summary>
+        <p>Most converters dump Markdown into a page. Imprint typesets it: cover and clickable TOC with exact page numbers, 2-em first-line indents, kinsoku line-breaking, widow/orphan control, tables that repeat their header across pages, code that never splits mid-line — then scores the output 0–100 with evidence for each check.</p>
+      </details>
+      <details>
+        <summary>Why 97/100 for the red-header document, not 100?</summary>
+        <p>Because honesty is a feature. The gongwen template requires FangSong (仿宋) which ships with Windows but not macOS. On a machine without it, Imprint falls back to a serif font and deducts 3 points in the report — it tells you instead of pretending.</p>
+      </details>
+      <details>
+        <summary>Do I need LaTeX, or a Python environment?</summary>
+        <p>Neither. <code>npx imprint-pdf</code> auto-installs the engine on first run (pip with a GitHub fallback). The engine is a normal pip package for everyone else: <code>pip install imprint-pdf</code>.</p>
+      </details>
+      <details>
+        <summary>Can AI agents use it?</summary>
+        <p>Yes — it ships an MCP server (<code>imprint-mcp</code>) with render/list/validate/new tools, so agents can produce finished PDFs from a single sentence.</p>
+      </details>
+      <details>
+        <summary>Is it free / open source?</summary>
+        <p>MIT licensed, free forever, no accounts, no cloud. Everything runs locally.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="https://github.com/263311487-ux/imprint-pdf" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/263311487-ux/imprint-pdf/blob/main/README.md" target="_blank" rel="noopener">README</a>
+      <a href="https://www.npmjs.com/package/imprint-pdf" target="_blank" rel="noopener">npm</a>
+      <a href="https://github.com/263311487-ux/imprint-pdf/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/263311487-ux/imprint-pdf/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+    </div>
+    <p>Imprint — Markdown in, publisher-grade PDF out. 中文印刷级排版引擎。</p>
+  </div>
+</footer>
+
+<script>
+function copy(btn){const pre=btn.parentElement.querySelector('pre code');navigator.clipboard.writeText(pre.innerText).then(()=>{btn.textContent='copied';setTimeout(()=>btn.textContent='copy',1500)})}
+const io=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

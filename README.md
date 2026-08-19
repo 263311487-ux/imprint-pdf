@@ -28,7 +28,7 @@ imprint 论文.md
 
 # 常用命令
 npx imprint-pdf --new report     # 从模板起稿
-npx imprint-pdf --list-themes    # 22 套主题
+npx imprint-pdf --list-themes    # 24 套主题
 npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 ```
 
@@ -42,7 +42,7 @@ npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 
 ![mermaid 流程图](examples/qa/charts-03.png)
 
-## 主题画廊（22 套 · 全部通过印刷级质检）
+## 主题画廊（24 套 · 全部通过印刷级质检）
 
 <p align="center">
 <img src="examples/qa/modern-01.png" width="150" alt="modern"/>
@@ -76,6 +76,7 @@ npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 <img src="examples/qa/minimal-01.png" width="150" alt="minimal"/>
 <img src="examples/qa/ink-01.png" width="150" alt="ink"/>
 <img src="examples/qa/gongwen-01.png" width="150" alt="gongwen 公文"/>
+<img src="examples/qa/ieee-03.png" width="150" alt="ieee 英文论文"/>
 </p>
 
 ## 双栏学术论文模板
@@ -157,7 +158,7 @@ imprint-mcp
 
 - **封面 + 目录**：frontmatter 里的 `title / author / date` 自动生成封面，标题自动生成可点击目录（页码精确）
 - **智能换肤**：不指定主题时，按标题/关键词/正文信号自动推荐（含理由）；显式指定优先
-- **主题系统**：22 套主题（见下方画廊）——现代杂志 / 学术书卷 / 北欧极简 / 护眼纸色 / 报纸头版 / 柔和粉彩 / 纯黑白 / 玉石绿 / 咖啡暖棕 / 海洋蓝 / 薰衣草紫 / 樱粉 / 松林绿 / 勃艮第酒红 / 石墨灰 / 深夜蓝纸（暗色）/ 珊瑚橙 / 琥珀金 / 薄荷青 / 沙漠沙色 / **极简（minimal）** / **线装书（ink，宣纸+印章红）**，自定义主题 = 一个 JSON 文件
+- **主题系统**：24 套主题（见下方画廊）——现代杂志 / 学术书卷 / 北欧极简 / 护眼纸色 / 报纸头版 / 柔和粉彩 / 纯黑白 / 玉石绿 / 咖啡暖棕 / 海洋蓝 / 薰衣草紫 / 樱粉 / 松林绿 / 勃艮第酒红 / 石墨灰 / 深夜蓝纸（暗色）/ 珊瑚橙 / 琥珀金 / 薄荷青 / 沙漠沙色 / **极简（minimal）** / **线装书（ink，宣纸+印章红）** / **红头公文（gongwen）** / **IEEE 英文论文（ieee）**，自定义主题 = 一个 JSON 文件
 - **GitHub 风格提示框**：`> [!NOTE]` / `[!TIP]` / `[!WARNING]` / `[!IMPORTANT]` / `[!CAUTION]` 自动渲染为印刷级彩色提示卡，见 `examples/alerts.md`
 - **Mermaid 图表**：` ```mermaid ` 代码块自动渲染为矢量图（中文正常、无限缩放），未装引擎时优雅回退代码块，见 `examples/charts.md`
 - **数学公式**：`$行内公式$` / `$$块级公式$$` 渲染为矢量 SVG（matplotlib mathtext，无数学字体依赖），见 `examples/math.md`
@@ -193,7 +194,7 @@ imprint-mcp
 
 ## 路线图
 
-- 更多主题（minimal / ink 已上线，22 套）
+- 更多主题（24 套已上线：minimal / ink / gongwen / ieee 等）
 - npm 分发 `npx imprint`（已上线）
 - 双栏 / 学术模板（已上线）
 - PyPI 发布
