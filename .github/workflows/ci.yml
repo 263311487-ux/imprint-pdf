@@ -29,11 +29,17 @@ jobs:
 
       - name: Install system libs (macOS)
         if: runner.os == 'macOS'
-        run: brew install pango
+        run: |
+          brew install pango
+          # WeasyPrint loads glib/pango via ctypes; expose Homebrew's lib dir.
+          echo "DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib" >> "$GITHUB_ENV"
 
       - name: Install system libs (Windows)
         if: runner.os == 'Windows'
-        run: choco install gtk-runtime -y --no-progress
+        run: |
+          choco install gtk-runtime -y --no-progress
+          # Put the GTK runtime DLLs on PATH for the ctypes loader.
+          echo "C:\Program Files\GTK3-Runtime Win64\bin" >> "$GITHUB_PATH"
 
       - name: Install package
         run: |
