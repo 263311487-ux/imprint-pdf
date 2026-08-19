@@ -83,20 +83,27 @@ function installImprint() {
   if (!py) {
     fail('未找到 Python 3.10+。请先安装: https://www.python.org/downloads/');
   }
-  const attempts = [
-    [py, ['-m', 'pip', 'install', '--quiet', '--user', 'imprint-pdf']],
-    [py, ['-m', 'pip', 'install', '--quiet', '--user', '--break-system-packages', 'imprint-pdf']],
-    [py, ['-m', 'pip', 'install', '--quiet', '--user', 'git+https://github.com/263311487-ux/imprint-pdf.git']],
-    [py, ['-m', 'pip', 'install', '--quiet', '--user', '--break-system-packages', 'git+https://github.com/263311487-ux/imprint-pdf.git']],
-  ];
-  for (const [c, a] of attempts) {
-    try {
-      execFileSync(c, a, { stdio: 'inherit' });
-      return py;
-    } catch {
-      /* try next source */
+  const tryInstall = (args, env, n = 3) => {
+    for (let i = 0; i < n; i++) {
+      try {
+        execFileSync(py, args, { stdio: 'inherit', env: { ...process.env, ...env } });
+        return true;
+      } catch {
+        if (i < n - 1) console.error('  安装失败，重试中...');
+      }
     }
-  }
+    return false;
+  };
+  // 1) PyPI 官方源
+  if (tryInstall(['-m', 'pip', 'install', '--quiet', '--user', 'imprint-pdf'])) return py;
+  if (tryInstall(['-m', 'pip', 'install', '--quiet', '--user', '--break-system-packages', 'imprint-pdf'])) return py;
+  // 2) 国内镜像（对 CN 用户更稳）
+  if (tryInstall(['-m', 'pip', 'install', '--quiet', '--user', '-i', 'https://pypi.tuna.tsinghua.edu.cn/simple', 'imprint-pdf'])) return py;
+  if (tryInstall(['-m', 'pip', 'install', '--quiet', '--user', '--break-system-packages', '-i', 'https://pypi.tuna.tsinghua.edu.cn/simple', 'imprint-pdf'])) return py;
+  // 3) GitHub 源兜底（HTTP/1.1 避免 HTTP2 framing 错误）
+  const git = 'git+https://github.com/263311487-ux/imprint-pdf.git';
+  if (tryInstall(['-m', 'pip', 'install', '--quiet', '--user', git], { GIT_HTTP_VERSION: 'HTTP/1.1' })) return py;
+  if (tryInstall(['-m', 'pip', 'install', '--quiet', '--user', '--break-system-packages', git], { GIT_HTTP_VERSION: 'HTTP/1.1' })) return py;
   fail('自动安装失败，请手动执行: python3 -m pip install --user imprint-pdf');
 }
 

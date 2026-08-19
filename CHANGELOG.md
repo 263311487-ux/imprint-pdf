@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.13.0] - 2026-08-20
+
+### Fixed
+- npx 一键安装稳健性：自动安装引擎失败时自动重试；新增清华镜像源（国内用户）；GitHub 源兜底改用 HTTP/1.1 规避 HTTP2 framing 网络错误
 All notable changes to Imprint are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning is SemVer.
 
