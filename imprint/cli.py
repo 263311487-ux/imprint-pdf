@@ -121,7 +121,7 @@ def main(argv: list[str] | None = None) -> int:
 
     report = validate_pdf(
         out,
-        toc_entries=[(i.text, i.href) for i in conv.toc],
+        toc_entries=[] if str(meta.get("layout") or "").strip().lower() == "gongwen" else [(i.text, i.href) for i in conv.toc],
         serif_hint=meta.get("theme-font-hint") or "Songti",
         theme_colors=theme["tokens"].get("color"),
     )

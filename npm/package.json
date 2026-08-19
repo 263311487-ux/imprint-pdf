@@ -1,6 +1,6 @@
 {
   "name": "imprint-pdf",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "AI-native, print-grade Chinese PDF generator. Markdown in, publisher-quality PDF out, with a 0-100 print-quality report. One command: npx imprint-pdf.",
   "license": "MIT",
   "type": "commonjs",

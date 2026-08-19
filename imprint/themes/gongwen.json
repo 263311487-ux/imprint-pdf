@@ -1,0 +1,40 @@
+{
+  "name": "gongwen",
+  "description": "党政机关公文格式（GB/T 9704）：红色版头 + 仿宋三号正文 + 黑体标题",
+  "tokens": {
+    "color": {
+      "ink": "#1a1a1a",
+      "paper": "#ffffff",
+      "accent": "#c7000b",
+      "accent-soft": "#fdf2f2",
+      "muted": "#4a4a4a",
+      "line": "#bfbfbf",
+      "code-bg": "#f6f6f6",
+      "table-head": "#f2f2f2"
+    },
+    "typography": {
+      "font-serif": "\"FangSong\", \"STFangsong\", \"仿宋\", \"Songti SC\", \"Noto Serif CJK SC\", serif",
+      "font-serif-alt": "\"Kaiti SC\", \"KaiTi\", \"STKaiti\", serif",
+      "font-sans": "\"Heiti SC\", \"SimHei\", \"Noto Sans CJK SC\", sans-serif",
+      "font-mono": "\"SF Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "16pt",
+      "size-h1": "22pt",
+      "size-h2": "16pt",
+      "size-h3": "15pt",
+      "size-small": "12pt",
+      "line-height": "1.75"
+    },
+    "spacing": {
+      "page-margin": "3.7cm 2.8cm 3.5cm 2.6cm",
+      "para-indent": "2em",
+      "para-gap": "0em",
+      "heading-gap": "1em"
+    },
+    "decoration": {
+      "h1-rule": "none",
+      "quote-bar": "0.5pt solid",
+      "code-radius": "2pt",
+      "cover-accent": "#c7000b"
+    }
+  }
+}

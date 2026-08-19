@@ -3,6 +3,13 @@
 All notable changes to Imprint are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning is SemVer.
 
+## [0.10.0] - 2026-08-19
+
+### Added
+- 党政机关公文模板：`imprint --new gongwen` + frontmatter `layout: gongwen` — GB/T 9704 红头版式（红色发文机关标志 30pt、发文字号、红色分隔线含 ★、无封面无目录、主送机关顶格、右对齐落款）；新增 `gongwen` 主题（仿宋三号正文 16pt、黑体标题、标准公文页边距）；智能换肤新增公文信号（通知/决定/批复/请示/印发/红头/人民政府 等）
+- `:::addressee`（主送机关）与 `:::signature`（落款）容器，双栏版之后第二套排版语言
+- 修复：layout CSS 曾以 `{{ }}` 输出（tinycss2 恰好容忍）；版头此前用 h1 会被「首个 h1 加 first」规则写成双 class 导致红色/字号失效，改用 `<p>` 规避
+
 ## [0.9.0] - 2026-08-19
 
 ### Added

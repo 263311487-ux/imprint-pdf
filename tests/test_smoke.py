@@ -129,6 +129,29 @@ def test_two_column_paper(tmp_path):
     assert report.score >= 95, report.print_table()
 
 
+def test_gongwen_red_header(tmp_path):
+    """GB/T 9704 公文: 红色版头、无封面无目录、落款右对齐."""
+    from importlib.resources import files
+
+    tpl = files("imprint.templates").joinpath("gongwen.md").read_text(encoding="utf-8")
+    conv = md_to_html(tpl)
+    assert conv.meta.get("layout") == "gongwen"
+    html = build_document(conv)
+    assert 'class="content gongwen"' in html
+    assert 'class="gongwen-issuer"' in html
+    assert 'class="gongwen-line"' in html
+    assert "<section class=\"cover\">" not in html
+    assert "toc-page" not in html
+    assert 'class="addressee"' in html
+    assert 'class="signature"' in html
+    css, _ = theme_css("gongwen")
+    out = tmp_path / "gongwen.pdf"
+    pages = render_pdf(html, css, out)
+    assert pages == 2
+    report = validate_pdf(out, serif_hint="FangSong")
+    assert report.score >= 95, report.print_table()
+
+
 def test_footnote_glyph_coverage():
     """Footnote backrefs must not use U+21A9/U+FE0E (missing in CJK fonts,
     which makes Pango fall back to LastResort = tofu in the rendered PDF)."""

@@ -235,6 +235,8 @@ def md_to_html(md_text: str) -> Conversion:
         .use(_alerts_plugin)
         .use(container_plugin, name="abstract")
         .use(container_plugin, name="keywords")
+        .use(container_plugin, name="addressee")
+        .use(container_plugin, name="signature")
     )
     md.renderer.rules["fence"] = _mermaid_aware_fence(md.renderer.rules["fence"])
     _install_math_renderer(md)
@@ -344,6 +346,18 @@ def _toc_html(toc: list[TocItem]) -> str:
     return f'<section class="toc-page"><h2>目 录</h2><ul class="toc-list">{"".join(lis)}</ul></section>'
 
 
+def _gongwen_header_html(meta: dict) -> str:
+    """GB/T 9704 版头: 发文机关标志 + 发文字号 + 红色分隔线."""
+    issuer = html.escape(str(meta.get("issuer") or meta.get("author") or "×××文件"))
+    doc_no = html.escape(str(meta.get("document-no") or ""))
+    # 用 <p> 而非 <h1>: 避免被「首个 h1 加 first class」的规则改写成双 class
+    parts = ['<header class="gongwen-head">', f'<p class="gongwen-issuer">{issuer}</p>']
+    if doc_no:
+        parts.append(f'<p class="gongwen-no">{doc_no}</p>')
+    parts.append('<div class="gongwen-line"></div></header>')
+    return "".join(parts)
+
+
 def build_document(conv: Conversion) -> str:
     meta = conv.meta
     title = html.escape(str(meta.get("title") or "Untitled"))
@@ -352,6 +366,7 @@ def build_document(conv: Conversion) -> str:
     description = html.escape(str(meta.get("description") or meta.get("subtitle") or ""))
     layout = str(meta.get("layout") or "").strip().lower()
     two_column = layout in ("two-column", "two_column", "2col", "paper")
+    gongwen = layout == "gongwen"
     meta_tags = (
         f'<meta name="author" content="{author}"/>'
         f'<meta name="keywords" content="{keywords}"/>'
@@ -363,37 +378,111 @@ def build_document(conv: Conversion) -> str:
     if two_column:
         content_class = "content two-column"
         layout_css = """
-main.content.two-column {{
+main.content.two-column {
   column-count: 2;
   column-gap: 1.6em;
   column-fill: balance;
-}}
+}
 main.content.two-column .abstract,
-main.content.two-column .keywords {{
+main.content.two-column .keywords {
   column-span: all;
-}}
+}
 main.content.two-column h1,
 main.content.two-column h2,
 main.content.two-column h3,
-main.content.two-column h4 {{
+main.content.two-column h4 {
   break-after: avoid;
   page-break-after: avoid;
-}}
-main.content.two-column p {{
+}
+main.content.two-column p {
   orphans: 3;
   widows: 3;
-}}
-main.content.two-column table {{
+}
+main.content.two-column table {
   width: 100%;
-}}
+}
 main.content.two-column .highlight pre,
-main.content.two-column pre {{
+main.content.two-column pre {
   white-space: pre-wrap;
-}}
+}
 """
-    cover = _cover_html(meta)
-    toc = _toc_html(conv.toc)
+    elif gongwen:
+        content_class = "content gongwen"
+        layout_css = """
+main.content.gongwen {
+  padding-top: 0.6em;
+}
+.gongwen-head {
+  text-align: center;
+  padding-bottom: 1.4em;
+}
+.gongwen-issuer {
+  color: #c7000b;
+  font-size: 30pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  font-family: "STZhongsong", "Songti SC", serif;
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+}
+.gongwen-no {
+  font-family: "Heiti SC", "Noto Sans CJK SC", sans-serif;
+  font-size: 12pt;
+  margin: 0.8em 0 0.2em;
+  text-align: center;
+}
+.gongwen-line {
+  border-bottom: 2.4pt solid #c7000b;
+  margin-top: 0.9em;
+  position: relative;
+}
+.gongwen-line::after {
+  content: "★";
+  position: absolute;
+  left: 50%;
+  top: -0.55em;
+  transform: translateX(-50%);
+  color: #c7000b;
+  font-size: 13pt;
+  background: #ffffff;
+  padding: 0 0.4em;
+  line-height: 1;
+}
+main.content.gongwen h1 {
+  text-align: center;
+  border-bottom: none;
+  margin-top: 1.2em;
+}
+main.content.gongwen h1.first {
+  page-break-before: auto;
+  break-before: auto;
+}
+main.content.gongwen h1::after {
+  content: none;
+}
+main.content.gongwen .addressee {
+  text-indent: 0;
+  margin: 0.6em 0 0.2em;
+  font-weight: 600;
+}
+main.content.gongwen .signature {
+  text-align: right;
+  margin-top: 2.2em;
+}
+main.content.gongwen .signature p {
+  text-indent: 0;
+  margin: 0.15em 0;
+}
+main.content.gongwen table {
+  width: 100%;
+}
+"""
+    cover = "" if gongwen else _cover_html(meta)
+    toc = "" if gongwen else _toc_html(conv.toc)
     body = conv.html
+    if gongwen:
+        body = _gongwen_header_html(meta) + body
     # mark first h1 as .first so it doesn't force a blank page after the TOC
     body = re.sub(r'<h1', '<h1 class="first"', body, count=1)
     return f"""<!DOCTYPE html>

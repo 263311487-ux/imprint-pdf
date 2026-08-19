@@ -75,6 +75,7 @@ npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 <p align="center">
 <img src="examples/qa/minimal-01.png" width="150" alt="minimal"/>
 <img src="examples/qa/ink-01.png" width="150" alt="ink"/>
+<img src="examples/qa/gongwen-01.png" width="150" alt="gongwen 公文"/>
 </p>
 
 ## 双栏学术论文模板
@@ -84,6 +85,16 @@ npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 <p align="center">
 <img src="examples/qa/paper-03.png" width="260" alt="paper 双栏正文"/>
 <img src="examples/qa/paper-04.png" width="260" alt="paper 双栏图表"/>
+</p>
+
+## 党政机关公文（GB/T 9704 红头文件）
+
+`imprint --new gongwen` 一键生成符合《党政机关公文格式》的红头文件：
+红色发文机关标志、发文字号、红色分隔线（★）、黑体标题、仿宋三号正文、
+右对齐落款与成文日期。
+
+<p align="center">
+<img src="examples/qa/gongwen-01.png" width="300" alt="gongwen 红头文件"/>
 </p>
 
 换肤 = 一行命令：`imprint paper.md --theme wine`；**不指定也会智能换肤**——自动分析内容气质选主题并说明理由（如周报自动用 `graphite`，论文自动用 `academic`）。
@@ -143,7 +154,7 @@ imprint-mcp
 - **GitHub 风格提示框**：`> [!NOTE]` / `[!TIP]` / `[!WARNING]` / `[!IMPORTANT]` / `[!CAUTION]` 自动渲染为印刷级彩色提示卡，见 `examples/alerts.md`
 - **Mermaid 图表**：` ```mermaid ` 代码块自动渲染为矢量图（中文正常、无限缩放），未装引擎时优雅回退代码块，见 `examples/charts.md`
 - **数学公式**：`$行内公式$` / `$$块级公式$$` 渲染为矢量 SVG（matplotlib mathtext，无数学字体依赖），见 `examples/math.md`
-- **模板系统**：`imprint --new report|book|resume|techdoc|letter|paper` 一键起稿，模板自带对应排版气质（石墨灰报告 / 米黄书稿 / 等宽简历 / 海洋蓝技术文档 / 薰衣草信函 / 双栏学术论文）
+- **模板系统**：`imprint --new report|book|resume|techdoc|letter|paper|gongwen` 一键起稿，模板自带对应排版气质（石墨灰报告 / 米黄书稿 / 等宽简历 / 海洋蓝技术文档 / 薰衣草信函 / 双栏学术论文 / 红头公文）
 - **图片压缩**：`--compress` 自动降采样超大图并重编码（实测 11.7MB → 1.4MB）
 - **字体体检**：生成前自动检查主题字体本机是否可用，缺失时明确警告
 - **中文规范**：避头尾禁则、首行缩进、中英文混排、英文段落自动连字
@@ -162,8 +173,9 @@ imprint-mcp
 | 设计系统主题 | 无 | 无 | **DTCG tokens** |
 | 质检报告 0–100 | 无 | 无 | **自带** |
 | 数学公式 | 插件级 | 无 | **矢量内嵌** |
-| 模板起稿 | 无 | 无 | **6 套内置** |
+| 模板起稿 | 无 | 无 | **7 套内置** |
 | 双栏学术排版 | 无 | 无 | **内置** |
+| 公文格式（红头文件） | 无 | 无 | **内置** |
 | WCAG 对比度检查 | 无 | 无 | **内置** |
 | PDF/UA 无障碍 | 手动 | 无 | **默认** |
 
