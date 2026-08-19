@@ -23,20 +23,24 @@ jobs:
 
       - name: Install system libs (Linux)
         if: runner.os == 'Linux'
-        timeout-minutes: 10
+        timeout-minutes: 15
         run: |
-          # Try direct install first (fresh images have package lists);
-          # fall back to apt-get update only when needed.
-          sudo apt-get install -y --no-install-recommends \
-            libpango-1.0-0 libpangoft2-1.0-0 fonts-noto-cjk \
-          || { for i in 1 2 3; do
-                 sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 \
-                   -o Acquire::https::Timeout=30 update && break
-                 echo "apt-get update failed (attempt $i), retrying..."
-                 sleep 15
-               done
-               sudo apt-get install -y --no-install-recommends \
-                 libpango-1.0-0 libpangoft2-1.0-0 fonts-noto-cjk; }
+          # GitHub ubuntu runners occasionally hit flaky apt mirrors;
+          # retry both update and install with backoff until one sticks.
+          for i in 1 2 3 4; do
+            if sudo apt-get install -y --no-install-recommends \
+                -o Acquire::Retries=5 -o Acquire::http::Timeout=60 \
+                -o Acquire::https::Timeout=60 \
+                libpango-1.0-0 libpangoft2-1.0-0 fonts-noto-cjk; then
+              exit 0
+            fi
+            echo "apt install failed (attempt $i), cleaning lists and retrying..."
+            sudo rm -rf /var/lib/apt/lists/*
+            sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 \
+              -o Acquire::https::Timeout=60 update || true
+            sleep 20
+          done
+          exit 1
 
       - name: Install system libs (macOS)
         if: runner.os == 'macOS'
