@@ -8,12 +8,29 @@ Imprint 是一个 AI 原生的中文印刷级 PDF 生成器。它把 Markdown �
 
 <p align="center">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/imprint-pdf.svg">
+  <img alt="npm" src="https://img.shields.io/npm/v/imprint-pdf.svg">
   <img alt="Python" src="https://img.shields.io/pypi/pyversions/imprint-pdf.svg">
   <img alt="License" src="https://img.shields.io/pypi/l/imprint-pdf.svg">
   <img alt="Downloads" src="https://img.shields.io/pypi/dm/imprint-pdf.svg">
   <img alt="CI" src="https://github.com/263311487-ux/imprint-pdf/actions/workflows/ci.yml/badge.svg">
   <img alt="Stars" src="https://img.shields.io/github/stars/263311487-ux/imprint-pdf">
 </p>
+
+## 快速开始（零配置）
+
+```bash
+# 方式一：一行命令（自动安装引擎，跨平台）
+npx imprint-pdf 论文.md
+
+# 方式二：pip 安装
+pip install imprint-pdf
+imprint 论文.md
+
+# 常用命令
+npx imprint-pdf --new report     # 从模板起稿
+npx imprint-pdf --list-themes    # 22 套主题
+npx imprint-pdf 论文.md --theme academic --out 论文.pdf
+```
 
 ![封面](examples/qa/sample-01.png)
 

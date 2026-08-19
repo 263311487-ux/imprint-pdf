@@ -6,6 +6,7 @@ All notable changes to Imprint are documented here. Format follows
 ## [0.8.0] - 2026-08-19
 
 ### Added
+- npm 发布：`npx imprint-pdf` 一行命令体验（自动安装 Python 引擎，PyPI→GitHub 兜底）；包内提供 `imprint` / `imprint-pdf` 两个 bin
 - 主题：新增 minimal（极简：白纸黑字留白）与 ink（线装书：宣纸米色 + 印章朱红）；主题清单改为动态扫描，新增主题无需改代码；智能换肤支持新主题信号（古籍/线装/文言 → ink，留白/克制 → minimal）
 - MCP server：`imprint-mcp`（stdio）暴露 4 个工具（render_markdown / list_themes / validate_pdf / new_document），AI Agent 一句话出印刷级 PDF；依赖 `pip install imprint-pdf[mcp]`
 - 数学公式：`$行内公式$` / `$$块级公式$$` 经 matplotlib mathtext 渲染为矢量 SVG，无数学字体依赖，见 `examples/math.md`

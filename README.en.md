@@ -8,12 +8,29 @@ Imprint is an AI-native, print-grade Chinese PDF generator. It treats Markdown a
 
 <p align="center">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/imprint-pdf.svg">
+  <img alt="npm" src="https://img.shields.io/npm/v/imprint-pdf.svg">
   <img alt="Python" src="https://img.shields.io/pypi/pyversions/imprint-pdf.svg">
   <img alt="License" src="https://img.shields.io/pypi/l/imprint-pdf.svg">
   <img alt="Downloads" src="https://img.shields.io/pypi/dm/imprint-pdf.svg">
   <img alt="CI" src="https://github.com/263311487-ux/imprint-pdf/actions/workflows/ci.yml/badge.svg">
   <img alt="Stars" src="https://img.shields.io/github/stars/263311487-ux/imprint-pdf">
 </p>
+
+## Quick start (zero config)
+
+```bash
+# One command — auto-installs the engine (cross-platform)
+npx imprint-pdf paper.md
+
+# or via pip
+pip install imprint-pdf
+imprint paper.md
+
+# Common commands
+npx imprint-pdf --new report        # scaffold from a template
+npx imprint-pdf --list-themes       # all 22 themes
+npx imprint-pdf paper.md --theme academic --out paper.pdf
+```
 
 ![Cover](examples/qa/sample-01.png)
 
