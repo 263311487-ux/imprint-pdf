@@ -23,14 +23,19 @@ jobs:
 
       - name: Install system libs (Linux)
         if: runner.os == 'Linux'
-        timeout-minutes: 5
+        timeout-minutes: 10
         run: |
-          for i in 1 2 3; do
-            sudo apt-get update && break
-            echo "apt-get update failed (attempt $i), retrying..."
-            sleep 15
-          done
-          sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 fonts-noto-cjk
+          # Try direct install first (fresh images have package lists);
+          # fall back to apt-get update only when needed.
+          sudo apt-get install -y --no-install-recommends \
+            libpango-1.0-0 libpangoft2-1.0-0 fonts-noto-cjk \
+          || { for i in 1 2 3; do
+                 sudo apt-get update && break
+                 echo "apt-get update failed (attempt $i), retrying..."
+                 sleep 15
+               done
+               sudo apt-get install -y --no-install-recommends \
+                 libpango-1.0-0 libpangoft2-1.0-0 fonts-noto-cjk; }
 
       - name: Install system libs (macOS)
         if: runner.os == 'macOS'
