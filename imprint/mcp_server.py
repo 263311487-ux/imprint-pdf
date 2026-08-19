@@ -13,10 +13,8 @@ from mcp.server.fastmcp import FastMCP
 
 from .converter import build_document, md_to_html
 from .recommend import recommend_theme
-from .render import render_pdf
 from .theme import theme_css
 from .themes import list_themes
-from .validator import validate_pdf
 
 mcp = FastMCP("imprint")
 
@@ -36,6 +34,16 @@ def render_markdown(markdown: str, theme: str = "", output: str = "") -> dict:
         theme: optional theme name; empty = automatic smart recommendation.
         output: optional PDF output path; empty = a temp file is used.
     """
+    try:
+        from .render import render_pdf
+        from .validator import validate_pdf
+    except Exception as exc:  # pragma: no cover - environment dependent
+        raise RuntimeError(
+            "Imprint cannot render on this machine: WeasyPrint/pango is unavailable. "
+            "On macOS run `brew install pango` and set "
+            "DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib (arm64) "
+            f"or /usr/local/lib (Intel). ({exc})"
+        ) from exc
     conv = md_to_html(markdown)
     meta = conv.meta
     theme_name = (theme or meta.get("theme") or "").strip().lower()
@@ -67,6 +75,8 @@ def render_markdown(markdown: str, theme: str = "", output: str = "") -> dict:
 @mcp.tool()
 def validate_pdf_tool(pdf: str) -> dict:
     """Run the 0-100 print-quality report on an existing PDF."""
+    from .validator import validate_pdf
+
     report = validate_pdf(Path(pdf).expanduser())
     return {"score": report.score, "grade": report.grade, "report": report.to_dict()}
 

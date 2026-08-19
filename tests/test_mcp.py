@@ -36,10 +36,15 @@ def test_mcp_stdio_roundtrip():
     from mcp.client.stdio import stdio_client
 
     async def run():
+        # mcp's stdio client whitelists the child env (drops e.g.
+        # DYLD_FALLBACK_LIBRARY_PATH on macOS); inherit everything so the
+        # child can load pango/glib the same way the parent does.
+        env = {**__import__("os").environ}
         params = StdioServerParameters(
             command=sys.executable,
             args=["-m", "imprint.mcp_server"],
             cwd=str(ROOT),
+            env=env,
         )
         async with stdio_client(params) as (read, write):
             async with ClientSession(read, write) as session:
