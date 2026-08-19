@@ -3,7 +3,7 @@
 > **Markdown 进，出版社级 PDF 出，自带 0–100 印刷级质检报告。**
 
 <p align="center">
-  <a href="https://263311487-ux.github.io/imprint-pdf/"><img src="docs/banner.png" alt="Imprint · 印记 — Markdown 进，出版社级 PDF 出"></a>
+  <a href="https://263311487-ux.github.io/imprint-pdf/"><img src="docs/social-preview.png" alt="Imprint · 印记 — Markdown 进，出版社级 PDF 出"></a>
 </p>
 
 [English](README.en.md) · [简体中文](README.md) · [✨ 在线画廊 / Live showcase](https://263311487-ux.github.io/imprint-pdf/)
