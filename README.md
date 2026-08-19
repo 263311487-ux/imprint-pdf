@@ -195,6 +195,7 @@ imprint-mcp
 
 - [完美 PDF 标准](docs/完美PDF标准.md)——"完美"的定义与验收门槛
 - [极致借鉴清单](docs/极致借鉴清单_技术选型_20260819.md)——每个环节的社区选型与实测结论
+- [项目故事 · 从草稿到成品](docs/skill-report.md)——为什么做、怎么做到极致（[成品 PDF](https://263311487-ux.github.io/imprint-pdf/skill-report.pdf)）
 
 ## 路线图
 
