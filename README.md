@@ -9,6 +9,8 @@ Imprint 是一个 AI 原生的中文印刷级 PDF 生成器。它把 Markdown �
   <img alt="Python" src="https://img.shields.io/pypi/pyversions/imprint-pdf.svg">
   <img alt="License" src="https://img.shields.io/pypi/l/imprint-pdf.svg">
   <img alt="Downloads" src="https://img.shields.io/pypi/dm/imprint-pdf.svg">
+  <img alt="CI" src="https://github.com/263311487-ux/imprint-pdf/actions/workflows/ci.yml/badge.svg">
+  <img alt="Stars" src="https://img.shields.io/github/stars/263311487-ux/imprint-pdf">
 </p>
 
 ![封面](examples/qa/sample-01.png)
