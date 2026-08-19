@@ -1,0 +1,39 @@
+{
+  "name": "modern",
+  "description": "现代杂志气质：深灰墨色 + 靛蓝点缀，黑体标题 + 宋体正文",
+  "tokens": {
+    "color": {
+      "ink": "#1c1c1e",
+      "paper": "#ffffff",
+      "accent": "#3b5bdb",
+      "accent-soft": "#eef1fd",
+      "muted": "#667085",
+      "line": "#dde1e6",
+      "code-bg": "#f5f6f8",
+      "table-head": "#f2f3f5"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", \"Source Han Serif SC\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif",
+      "font-mono": "\"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "22pt",
+      "size-h2": "14.5pt",
+      "size-h3": "11.5pt",
+      "size-small": "8.5pt",
+      "line-height": "1.85"
+    },
+    "spacing": {
+      "page-margin": "2.4cm 1.9cm",
+      "para-indent": "2em",
+      "para-gap": "0.25em",
+      "heading-gap": "1.2em"
+    },
+    "decoration": {
+      "h1-rule": "0.8pt solid",
+      "quote-bar": "2.2pt solid",
+      "code-radius": "3pt",
+      "cover-accent": "#3b5bdb"
+    }
+  }
+}

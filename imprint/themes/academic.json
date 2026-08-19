@@ -1,0 +1,40 @@
+{
+  "name": "academic",
+  "description": "学术书卷气质：沉静靛蓝 + 米白纸感，宋体正文 + 楷体引用",
+  "tokens": {
+    "color": {
+      "ink": "#232a33",
+      "paper": "#fdfcf9",
+      "accent": "#2f4858",
+      "accent-soft": "#eef2f4",
+      "muted": "#606a76",
+      "line": "#d9d4c8",
+      "code-bg": "#f4f1ea",
+      "table-head": "#efece3"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", serif",
+      "font-serif-alt": "\"Kaiti SC\", \"KaiTi\", \"STKaiti\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", sans-serif",
+      "font-mono": "\"SF Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "20pt",
+      "size-h2": "14pt",
+      "size-h3": "11pt",
+      "size-small": "8.5pt",
+      "line-height": "1.9"
+    },
+    "spacing": {
+      "page-margin": "2.6cm 2.1cm",
+      "para-indent": "2em",
+      "para-gap": "0.2em",
+      "heading-gap": "1.1em"
+    },
+    "decoration": {
+      "h1-rule": "0.5pt solid",
+      "quote-bar": "2pt solid",
+      "code-radius": "2pt",
+      "cover-accent": "#2f4858"
+    }
+  }
+}

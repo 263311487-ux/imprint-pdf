@@ -1,0 +1,39 @@
+{
+  "name": "lavender",
+  "description": "薰衣草紫：安静柔和的紫调，适合随笔与散文",
+  "tokens": {
+    "color": {
+      "ink": "#2f2a45",
+      "paper": "#fbfaff",
+      "accent": "#6d5bd0",
+      "accent-soft": "#ece8fb",
+      "muted": "#5f5a75",
+      "line": "#d9d4ea",
+      "code-bg": "#f1eef9",
+      "table-head": "#eae7f6"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", \"Source Han Serif SC\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif",
+      "font-mono": "\"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "20pt",
+      "size-h2": "13.5pt",
+      "size-h3": "11.5pt",
+      "size-small": "8.5pt",
+      "line-height": "1.9"
+    },
+    "spacing": {
+      "page-margin": "2.5cm 2cm",
+      "para-indent": "2em",
+      "para-gap": "0.22em",
+      "heading-gap": "1.15em"
+    },
+    "decoration": {
+      "h1-rule": "0.6pt solid",
+      "quote-bar": "2pt solid",
+      "code-radius": "2pt",
+      "cover-accent": "#6d5bd0"
+    }
+  }
+}

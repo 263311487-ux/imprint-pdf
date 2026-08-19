@@ -1,0 +1,39 @@
+{
+  "name": "newspaper",
+  "description": "报纸头版：近黑墨色 + 报头红，紧凑密排的新闻感",
+  "tokens": {
+    "color": {
+      "ink": "#141414",
+      "paper": "#ffffff",
+      "accent": "#9a1f1f",
+      "accent-soft": "#f7ecec",
+      "muted": "#555555",
+      "line": "#c9c9c9",
+      "code-bg": "#f4f4f4",
+      "table-head": "#ececec"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", \"Source Han Serif SC\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif",
+      "font-mono": "\"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "24pt",
+      "size-h2": "14.5pt",
+      "size-h3": "11.5pt",
+      "size-small": "8.5pt",
+      "line-height": "1.75"
+    },
+    "spacing": {
+      "page-margin": "2.2cm 1.8cm",
+      "para-indent": "2em",
+      "para-gap": "0.18em",
+      "heading-gap": "1em"
+    },
+    "decoration": {
+      "h1-rule": "1pt solid",
+      "quote-bar": "2.4pt solid",
+      "code-radius": "1pt",
+      "cover-accent": "#9a1f1f"
+    }
+  }
+}

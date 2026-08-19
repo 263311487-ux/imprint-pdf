@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "imprint-pdf"
+version = "0.8.0"
+description = "AI-native, print-grade Chinese PDF generator: Markdown in, publisher-quality PDF out, with a 0-100 print-quality report."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Imprint" }]
+keywords = ["pdf", "markdown", "chinese", "typography", "weasyprint", "print"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Documentation",
+  "Topic :: Printing",
+]
+dependencies = [
+  "markdown-it-py>=3.0",
+  "mdit-py-plugins>=0.4",
+  "WeasyPrint>=61",
+  "PyYAML>=6.0",
+  "Pygments>=2.15",
+  "pdfplumber>=0.11",
+  "PyMuPDF>=1.24",
+]
+
+[project.optional-dependencies]
+charts = ["mermaidx>=0.1"]
+
+[project.scripts]
+imprint = "imprint.cli:main"
+
+[tool.setuptools]
+packages = ["imprint", "imprint.themes"]
+
+[tool.setuptools.package-data]
+imprint = ["themes/*.json", "templates/*.md"]

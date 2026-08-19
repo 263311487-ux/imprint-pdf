@@ -1,0 +1,39 @@
+{
+  "name": "mint",
+  "description": "薄荷青：清爽明亮的青绿色调",
+  "tokens": {
+    "color": {
+      "ink": "#1f2e2b",
+      "paper": "#fbfffe",
+      "accent": "#2b8a7a",
+      "accent-soft": "#e4f4f0",
+      "muted": "#4f635f",
+      "line": "#d3e4df",
+      "code-bg": "#ecf5f2",
+      "table-head": "#e5f0ec"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", \"Source Han Serif SC\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif",
+      "font-mono": "\"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "21pt",
+      "size-h2": "14pt",
+      "size-h3": "11.5pt",
+      "size-small": "8.5pt",
+      "line-height": "1.85"
+    },
+    "spacing": {
+      "page-margin": "2.4cm 1.9cm",
+      "para-indent": "2em",
+      "para-gap": "0.25em",
+      "heading-gap": "1.2em"
+    },
+    "decoration": {
+      "h1-rule": "0.8pt solid",
+      "quote-bar": "2.2pt solid",
+      "code-radius": "3pt",
+      "cover-accent": "#2b8a7a"
+    }
+  }
+}

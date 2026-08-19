@@ -1,0 +1,39 @@
+{
+  "name": "wine",
+  "description": "勃艮第酒红：古典书卷气息的深红",
+  "tokens": {
+    "color": {
+      "ink": "#2e1f24",
+      "paper": "#fdf9f7",
+      "accent": "#7a2e3e",
+      "accent-soft": "#f6e8ea",
+      "muted": "#6b565c",
+      "line": "#e2d2d5",
+      "code-bg": "#f4ecec",
+      "table-head": "#efe4e5"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", \"Source Han Serif SC\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif",
+      "font-mono": "\"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "20pt",
+      "size-h2": "13.5pt",
+      "size-h3": "11.5pt",
+      "size-small": "8.5pt",
+      "line-height": "1.9"
+    },
+    "spacing": {
+      "page-margin": "2.5cm 2cm",
+      "para-indent": "2em",
+      "para-gap": "0.22em",
+      "heading-gap": "1.15em"
+    },
+    "decoration": {
+      "h1-rule": "0.6pt solid",
+      "quote-bar": "2pt solid",
+      "code-radius": "2pt",
+      "cover-accent": "#7a2e3e"
+    }
+  }
+}

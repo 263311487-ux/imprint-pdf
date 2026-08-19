@@ -1,0 +1,30 @@
+# Changelog
+
+All notable changes to Imprint are documented here. Format follows
+[Keep a Changelog](https://keepachangelog.com/); versioning is SemVer.
+
+## [0.8.0] - 2026-08-19
+
+### Added
+- 数学公式：`$行内公式$` / `$$块级公式$$` 经 matplotlib mathtext 渲染为矢量 SVG，无数学字体依赖，见 `examples/math.md`
+- 模板系统：`imprint --new report|book|resume|techdoc|letter` 一键起稿，`--list-templates` 列出模板
+- 质检新增 3 项（共 14 项，100 分制）：缺字检测（LastResort/notdef 回退）、内容溢出、图片清晰度（<150 DPI 警告）
+- 脚注返回箭头改用 U+2191（原 U+21A9+FE0E 在 CJK 字体内缺失，会触发 Pango LastResort 回退 = 豆腐块）
+
+### Changed
+- 质检分数重分配：文本可选 15 / 字体 15 / 标点 15 / 目录 15 / 孤行 9 / 元数据 3 / 主题字体 3 / PDF-UA 3 / 页码 2 / 对比度 5 / 缺字 5 / 溢出 5 / 图片 DPI 5
+- `--list-templates` 改为动态读取模板目录
+
+## [0.7.0] - 2026-08-18
+
+### Added
+- 20 套设计系统主题（DTCG tokens，全部通过 WCAG 对比度 + 印刷级质检）
+- GitHub 风格提示框（NOTE/TIP/WARNING/IMPORTANT/CAUTION）
+- Mermaid 图表（纯 Python 渲染，零 Node 依赖，未装引擎时优雅回退）
+- 图片压缩 `--compress`（降采样 + 重编码）
+- 字体体检（生成前检查主题字体本机可用性）
+- 智能换肤（按内容气质自动推荐主题并说明理由）
+- PDF 书签 / PDF-UA 无障碍标签默认开启
+
+### Changed
+- 质检报告升级为 0–100 分制，逐项证据可查

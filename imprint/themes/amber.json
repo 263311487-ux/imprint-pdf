@@ -1,0 +1,39 @@
+{
+  "name": "amber",
+  "description": "琥珀金：温润金色的醇厚质感",
+  "tokens": {
+    "color": {
+      "ink": "#2c2418",
+      "paper": "#fffdf6",
+      "accent": "#b97a18",
+      "accent-soft": "#faf0dc",
+      "muted": "#6e5f44",
+      "line": "#e7dcc4",
+      "code-bg": "#f7f1e2",
+      "table-head": "#f2ead7"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", \"Source Han Serif SC\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif",
+      "font-mono": "\"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "20pt",
+      "size-h2": "13.5pt",
+      "size-h3": "11.5pt",
+      "size-small": "8.5pt",
+      "line-height": "1.9"
+    },
+    "spacing": {
+      "page-margin": "2.5cm 2cm",
+      "para-indent": "2em",
+      "para-gap": "0.22em",
+      "heading-gap": "1.15em"
+    },
+    "decoration": {
+      "h1-rule": "0.6pt solid",
+      "quote-bar": "2pt solid",
+      "code-radius": "2pt",
+      "cover-accent": "#b97a18"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "mono",
+  "description": "纯黑白：无彩色点缀的印刷经典，墨色即装饰",
+  "tokens": {
+    "color": {
+      "ink": "#111111",
+      "paper": "#ffffff",
+      "accent": "#333333",
+      "accent-soft": "#f2f2f2",
+      "muted": "#444444",
+      "line": "#bbbbbb",
+      "code-bg": "#f5f5f5",
+      "table-head": "#ebebeb"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", \"Source Han Serif SC\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif",
+      "font-mono": "\"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "22pt",
+      "size-h2": "14.5pt",
+      "size-h3": "11.5pt",
+      "size-small": "8.5pt",
+      "line-height": "1.8"
+    },
+    "spacing": {
+      "page-margin": "2.3cm 1.8cm",
+      "para-indent": "2em",
+      "para-gap": "0.2em",
+      "heading-gap": "1.1em"
+    },
+    "decoration": {
+      "h1-rule": "1pt solid",
+      "quote-bar": "2.4pt solid",
+      "code-radius": "0pt",
+      "cover-accent": "#111111"
+    }
+  }
+}

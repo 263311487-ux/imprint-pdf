@@ -1,0 +1,39 @@
+{
+  "name": "coral",
+  "description": "珊瑚橙：明快暖橙的活力感",
+  "tokens": {
+    "color": {
+      "ink": "#2e2320",
+      "paper": "#fffdfb",
+      "accent": "#e2604a",
+      "accent-soft": "#fdeee9",
+      "muted": "#6b5a52",
+      "line": "#e6d8d2",
+      "code-bg": "#f7f0ec",
+      "table-head": "#f2e8e2"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", \"Source Han Serif SC\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif",
+      "font-mono": "\"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "21pt",
+      "size-h2": "14pt",
+      "size-h3": "11.5pt",
+      "size-small": "8.5pt",
+      "line-height": "1.85"
+    },
+    "spacing": {
+      "page-margin": "2.4cm 1.9cm",
+      "para-indent": "2em",
+      "para-gap": "0.25em",
+      "heading-gap": "1.2em"
+    },
+    "decoration": {
+      "h1-rule": "0.8pt solid",
+      "quote-bar": "2.2pt solid",
+      "code-radius": "3pt",
+      "cover-accent": "#e2604a"
+    }
+  }
+}
