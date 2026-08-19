@@ -1,0 +1,39 @@
+{
+  "name": "ink",
+  "description": "线装书：宣纸米色 + 印章朱红，古籍气质",
+  "tokens": {
+    "color": {
+      "ink": "#2b2620",
+      "paper": "#f6f2e8",
+      "accent": "#9e2b25",
+      "accent-soft": "#f2e3db",
+      "muted": "#5d554a",
+      "line": "#d9cfbe",
+      "code-bg": "#efe9db",
+      "table-head": "#e9e1cf"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", \"Source Han Serif SC\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif",
+      "font-mono": "\"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "22pt",
+      "size-h2": "14pt",
+      "size-h3": "11.5pt",
+      "size-small": "8.5pt",
+      "line-height": "1.95"
+    },
+    "spacing": {
+      "page-margin": "2.5cm 2.0cm",
+      "para-indent": "2em",
+      "para-gap": "0.22em",
+      "heading-gap": "1.3em"
+    },
+    "decoration": {
+      "h1-rule": "0.8pt solid",
+      "quote-bar": "2.2pt solid",
+      "code-radius": "0pt",
+      "cover-accent": "#9e2b25"
+    }
+  }
+}

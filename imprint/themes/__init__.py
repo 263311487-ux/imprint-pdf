@@ -7,7 +7,17 @@ from importlib.resources import files
 from pathlib import Path
 
 
-BUILTIN_THEMES = ("modern", "academic", "nord", "sepia", "newspaper", "catppuccin", "mono", "jade", "coffee", "ocean", "lavender", "rose", "pine", "wine", "graphite", "midnight", "coral", "amber", "mint", "sand")
+def _builtin_themes() -> tuple[str, ...]:
+    return tuple(
+        sorted(
+            p.name.removesuffix(".json")
+            for p in files("imprint.themes").iterdir()
+            if p.name.endswith(".json")
+        )
+    )
+
+
+BUILTIN_THEMES = _builtin_themes()
 
 
 def load_theme(name: str, extra_dir: str | None = None) -> dict:
@@ -20,11 +30,11 @@ def load_theme(name: str, extra_dir: str | None = None) -> dict:
     for path in candidates:
         if path.exists():
             return json.loads(path.read_text(encoding="utf-8"))
-    raise FileNotFoundError(f"theme not found: {name} (available: {', '.join(BUILTIN_THEMES)})")
+    raise FileNotFoundError(f"theme not found: {name} (available: {', '.join(_builtin_themes())})")
 
 
 def list_themes(extra_dir: str | None = None) -> list[str]:
-    names = list(BUILTIN_THEMES)
+    names = list(_builtin_themes())
     if extra_dir:
         for p in sorted(Path(extra_dir).glob("*.json")):
             if p.stem not in names:

@@ -76,7 +76,7 @@ Every run ends with a quality report:
 
 - **Cover + TOC** — frontmatter `title / author / date` builds a cover; headings become a clickable TOC with page numbers that actually match
 - **Smart theming** — pick a theme explicitly, or let Imprint read the document and recommend one (with the reason why); 20 themes, including a dark one
-- **Theme gallery** — modern / academic / nord / sepia / newspaper / catppuccin / mono / jade / coffee / ocean / lavender / rose / pine / wine / graphite / midnight (dark) / coral / amber / mint / sand; custom themes are a single JSON file
+- **Theme gallery** — modern / academic / nord / sepia / newspaper / catppuccin / mono / jade / coffee / ocean / lavender / rose / pine / wine / graphite / midnight (dark) / coral / amber / mint / sand / minimal / ink (thread-bound book, rice paper + seal red); custom themes are a single JSON file
 - **GitHub-style alerts** — `> [!NOTE]` / `[!TIP]` / `[!WARNING]` / `[!IMPORTANT]` / `[!CAUTION]` render as print-grade callout cards
 - **Mermaid diagrams** — ` ```mermaid ` fences render to vector images (Chinese labels included); graceful code-block fallback when the engine is missing
 - **Math** — `$inline$` / `$$block$$` become vector SVG via matplotlib mathtext; no LaTeX or math fonts required

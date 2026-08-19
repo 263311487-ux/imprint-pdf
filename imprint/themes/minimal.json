@@ -1,0 +1,39 @@
+{
+  "name": "minimal",
+  "description": "极简：白纸黑字，留白即设计",
+  "tokens": {
+    "color": {
+      "ink": "#111111",
+      "paper": "#ffffff",
+      "accent": "#111111",
+      "accent-soft": "#f4f4f4",
+      "muted": "#555555",
+      "line": "#dddddd",
+      "code-bg": "#f7f7f7",
+      "table-head": "#f0f0f0"
+    },
+    "typography": {
+      "font-serif": "\"Songti SC\", \"Noto Serif CJK SC\", \"Source Han Serif SC\", serif",
+      "font-sans": "\"Heiti SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif",
+      "font-mono": "\"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, \"PingFang SC\", \"Songti SC\", monospace",
+      "size-body": "10.5pt",
+      "size-h1": "20pt",
+      "size-h2": "13.5pt",
+      "size-h3": "11pt",
+      "size-small": "8.5pt",
+      "line-height": "1.9"
+    },
+    "spacing": {
+      "page-margin": "2.6cm 2.2cm",
+      "para-indent": "2em",
+      "para-gap": "0.3em",
+      "heading-gap": "1.4em"
+    },
+    "decoration": {
+      "h1-rule": "0.5pt solid",
+      "quote-bar": "1.5pt solid",
+      "code-radius": "0pt",
+      "cover-accent": "#111111"
+    }
+  }
+}
