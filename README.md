@@ -2,7 +2,11 @@
 
 > **Markdown 进，出版社级 PDF 出，自带 0–100 印刷级质检报告。**
 
-[English](README.en.md) · [简体中文](README.md)
+<p align="center">
+  <a href="https://263311487-ux.github.io/imprint-pdf/"><img src="docs/banner.png" alt="Imprint · 印记 — Markdown 进，出版社级 PDF 出"></a>
+</p>
+
+[English](README.en.md) · [简体中文](README.md) · [✨ 在线画廊 / Live showcase](https://263311487-ux.github.io/imprint-pdf/)
 
 Imprint 是一个 AI 原生的中文印刷级 PDF 生成器。它把 Markdown 当成草稿，把 PDF 当成成品——按出版物的标准排版：宋体正文、黑体标题、首行缩进、标点避头尾、目录页码精确、表格跨页重复表头、代码不截断。生成之后，机器自动给这份 PDF 打分：**0–100 印刷级评分，逐项给出证据**。
 
