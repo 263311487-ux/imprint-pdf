@@ -4,7 +4,7 @@
 
 Imprint is an AI-native, print-grade Chinese PDF generator. It treats Markdown as the draft and the PDF as the finished product, following publishing standards: serif body text, sans headings, 2-em first-line indents, kinsoku punctuation rules, exact TOC page numbers, repeating table headers across pages, and code blocks that never split mid-line. After every render it scores the PDF **0–100** and shows evidence for every check.
 
-[简体中文](README.md)
+[简体中文](README.md) · [Live showcase](https://263311487-ux.github.io/imprint-pdf/)
 
 <p align="center">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/imprint-pdf.svg">
@@ -61,7 +61,7 @@ pip install imprint-pdf[mcp]
 
 imprint paper.md -o paper.pdf
 imprint paper.md --theme sepia --compress
-# scaffold from a starter template (report/book/resume/techdoc/letter/paper)
+# scaffold from a starter template (report/book/resume/techdoc/letter/paper/gongwen/ieee)
 imprint --new report -o my_report.md
 # start the MCP server (stdio) for Claude Code / Cursor / DeepSeek Harness, ...
 imprint-mcp
@@ -137,7 +137,7 @@ Every run ends with a quality report:
 | design-system themes | none | none | **DTCG tokens** |
 | 0–100 quality report | none | none | **built-in** |
 | math | plugin | none | **vector, embedded** |
-| starter templates | none | none | **5 built-in** |
+| starter templates | none | none | **8 built-in** |
 | WCAG contrast | none | none | **built-in** |
 | PDF/UA accessible | manual | none | **default** |
 
@@ -153,9 +153,10 @@ CI runs pytest on macOS / Linux / Windows × Python 3.10–3.12.
 
 ## Roadmap
 
-- More themes: 24 live today — incl. gongwen and ieee
-- npm distribution (`npx imprint`)
-- Two-column / academic template enhancements
+- [x] 24 themes · 8 templates · two-column papers · red-header docs · IEEE English papers
+- [x] npm distribution (`npx imprint-pdf`)
+- [ ] PyPI release (pip install imprint-pdf)
+- [ ] More templates: medical records, contracts
 
 ## License
 
