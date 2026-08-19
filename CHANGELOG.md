@@ -3,6 +3,13 @@
 All notable changes to Imprint are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning is SemVer.
 
+## [0.9.0] - 2026-08-19
+
+### Added
+- 双栏学术论文模板：`imprint --new paper` + frontmatter `layout: two-column` — 摘要/关键词通栏（`:::abstract` / `:::keywords` 容器），正文双栏，标题不落页尾、表格不跨栏、行内公式用 U+2060+nowrap 防断行
+- 验证器目录页码校验改读 PDF 书签（outline），比全文检索更准（不再被正文里的同名词误导）
+- 行首禁则检测豁免「公式图形 + 标点」合法行（pdfplumber 提取不到矢量公式文字导致的误报）
+
 ## [0.8.0] - 2026-08-19
 
 ### Added
