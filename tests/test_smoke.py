@@ -105,6 +105,30 @@ def test_math_rendering():
         assert "<code>" in conv.html  # graceful fallback
 
 
+def test_two_column_paper(tmp_path):
+    """layout: two-column + abstract/keywords containers -> print-grade PDF."""
+    from importlib.resources import files
+
+    tpl = files("imprint.templates").joinpath("paper.md").read_text(encoding="utf-8")
+    conv = md_to_html(tpl)
+    assert conv.meta.get("layout") == "two-column"
+    html = build_document(conv)
+    assert 'class="content two-column"' in html
+    assert 'class="abstract"' in html
+    assert 'class="keywords"' in html
+    assert "column-count: 2" in html
+    css, _ = theme_css("academic")
+    out = tmp_path / "paper.pdf"
+    pages = render_pdf(html, css, out)
+    assert pages >= 4
+    report = validate_pdf(
+        out,
+        toc_entries=[(i.text, i.href) for i in conv.toc],
+        serif_hint="Songti",
+    )
+    assert report.score >= 95, report.print_table()
+
+
 def test_footnote_glyph_coverage():
     """Footnote backrefs must not use U+21A9/U+FE0E (missing in CJK fonts,
     which makes Pango fall back to LastResort = tofu in the rendered PDF)."""

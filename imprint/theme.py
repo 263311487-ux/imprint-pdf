@@ -405,6 +405,9 @@ img.math-inline {{
   height: 1.2em;
   vertical-align: middle;
 }}
+.math-inline-unit {{
+  white-space: nowrap;
+}}
 .math-display {{
   text-align: center;
   margin: 1em 0 1.4em;
@@ -451,6 +454,26 @@ mark {{
   background: {accent_soft};
   padding: 0 2pt;
 }}
+
+/* ---------- academic abstract / keywords ---------- */
+.abstract {{
+  background: {accent_soft};
+  border-left: 2pt solid {accent};
+  padding: 0.8em 1em;
+  margin: 0.6em 0 1.2em;
+  font-size: {small};
+  line-height: 1.75;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}}
+.abstract p {{ margin: 0.3em 0; }}
+.abstract strong {{ color: {accent}; }}
+.keywords {{
+  font-size: {small};
+  color: {muted};
+  margin: 0 0 1.6em;
+}}
+.keywords strong {{ color: {ink}; }}
 
 /* ---------- code highlight colors (Pygments) ---------- */
 .highlight .c, .highlight .c1 {{ color: #6a737d; font-style: italic; }}

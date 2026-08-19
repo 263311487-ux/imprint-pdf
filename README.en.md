@@ -61,7 +61,7 @@ pip install imprint-pdf[mcp]
 
 imprint paper.md -o paper.pdf
 imprint paper.md --theme sepia --compress
-# scaffold from a starter template (report/book/resume/techdoc/letter)
+# scaffold from a starter template (report/book/resume/techdoc/letter/paper)
 imprint --new report -o my_report.md
 # start the MCP server (stdio) for Claude Code / Cursor / DeepSeek Harness, ...
 imprint-mcp
@@ -97,7 +97,8 @@ Every run ends with a quality report:
 - **GitHub-style alerts** — `> [!NOTE]` / `[!TIP]` / `[!WARNING]` / `[!IMPORTANT]` / `[!CAUTION]` render as print-grade callout cards
 - **Mermaid diagrams** — ` ```mermaid ` fences render to vector images (Chinese labels included); graceful code-block fallback when the engine is missing
 - **Math** — `$inline$` / `$$block$$` become vector SVG via matplotlib mathtext; no LaTeX or math fonts required
-- **Starter templates** — `imprint --new report|book|resume|techdoc|letter`
+- **Starter templates** — `imprint --new report|book|resume|techdoc|letter|paper` (the `paper` template renders a **two-column academic paper** with a full-width abstract/keywords block)
+- **Two-column academic layout** — `layout: two-column` in frontmatter; headings never orphan, tables never split mid-row, inline math never breaks a line
 - **Image compression** — `--compress` downscales oversized images and re-encodes (measured 11.7 MB → 1.4 MB)
 - **Font health check** — warns before rendering if a theme's font slot is missing on this machine
 - **Chinese typography rules** — kinsoku, first-line indent, CJK/Latin spacing, hyphenation for English paragraphs

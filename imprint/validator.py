@@ -268,18 +268,21 @@ def _check_punctuation(pdf_path: Path) -> CheckResult:
     violations: list[str] = []
     with pdfplumber.open(pdf_path) as pdf:
         for i, page in enumerate(pdf.pages, 1):
-            lines: dict[float, str] = {}
+            lines: dict[float, list] = {}
             for ch in page.chars:
                 key = round(ch["top"], 1)
-                lines[key] = lines.get(key, "") + ch["text"]
-            for top, text in lines.items():
-                text = text.strip()
+                lines.setdefault(key, []).append(ch)
+            for top, chars in lines.items():
+                chars.sort(key=lambda c: c["x0"])
+                text = "".join(c["text"] for c in chars).strip()
                 if not text:
                     continue
                 if len(text) == 1:
                     # 单字符装饰（引号/项目符号）不参与禁则判定
                     continue
-                if text[0] in HEAD_BAD:
+                # 行首禁则字若左侧同一行有内联图形（行内公式等矢量图），
+                # 视觉上并非行首，pdfplumber 提取不到图形文字导致误报。
+                if text[0] in HEAD_BAD and not _has_art_left(page, top, chars[0]["x0"]):
                     violations.append(f"第{i}页行首「{text[0]}」: {text[:18]}…")
                 if text[-1] in END_BAD:
                     violations.append(f"第{i}页行尾「{text[-1]}」: …{text[-18:]}")
@@ -288,6 +291,23 @@ def _check_punctuation(pdf_path: Path) -> CheckResult:
     r.evidence = "0 违规" if not violations else f"{len(violations)} 处违规"
     r.violations = violations
     return r
+
+
+def _has_art_left(page, line_top: float, first_x0: float) -> bool:
+    """True when an inline graphic (e.g. an SVG formula) sits directly left of
+    the first text char on this line, so the char is not truly a line start."""
+    for kind in ("rect", "curve", "line"):
+        for o in page.objects.get(kind, []):
+            o_top = o.get("top", 0)
+            o_bot = o.get("bottom", o_top)
+            if (
+                o.get("x1", 0) <= first_x0 + 2
+                and o.get("x0", 0) < first_x0 - 3
+                and abs(o_top - line_top) < 30
+                and (o_bot - o_top) < 30
+            ):
+                return True
+    return False
 
 
 def _check_widows(pdf_path: Path, toc_labels: list[str]) -> CheckResult:
@@ -356,12 +376,17 @@ def _check_toc(pdf_path: Path, toc_entries: list[tuple[str, str]]) -> CheckResul
             r.evidence = "目录页未解析出页码"
             return r
         actual: dict[str, int] = {}
-        for label, href in toc_entries:
-            for i in range(toc_page_idx + 1, len(pdf.pages)):
-                page = pdf.pages[i]
-                if label and page.search(label):
-                    actual[label] = i + 1
-                    break
+        outline: dict[str, int] = {}
+        with fitz.open(pdf_path) as doc:
+            for _lvl, title, page in doc.get_toc():
+                norm = re.sub(r"\s+", "", title or "")
+                outline[norm] = page
+        for label, _href in toc_entries:
+            norm = re.sub(r"\s+", "", label)
+            if norm in outline:
+                actual[label] = outline[norm]
+            else:
+                actual[label] = _find_heading_page(pdf, toc_page_idx, label)
     mismatches = []
     for label, listed in entries:
         if label in actual and actual[label] != listed:
@@ -371,6 +396,27 @@ def _check_toc(pdf_path: Path, toc_entries: list[tuple[str, str]]) -> CheckResul
     r.evidence = f"核对 {len(entries)} 条" if not mismatches else "; ".join(mismatches[:3])
     r.violations = mismatches
     return r
+
+
+def _find_heading_page(pdf, toc_page_idx: int, label: str) -> int | None:
+    """Locate a heading by font size (headings are >= 11.5pt, body is 10.5pt).
+    Used only when the PDF outline lacks the entry."""
+    import pdfplumber
+
+    with pdfplumber.open(pdf) as pdf_obj:
+        for i in range(toc_page_idx + 1, len(pdf_obj.pages)):
+            page = pdf_obj.pages[i]
+            big = [c for c in page.chars if c.get("size", 0) >= 11.5]
+            if not big:
+                continue
+            by_line: dict[float, list] = {}
+            for c in big:
+                by_line.setdefault(round(c["top"], 0), []).append(c)
+            for cs in by_line.values():
+                text = "".join(c["text"] for c in sorted(cs, key=lambda c: c["x0"]))
+                if label and re.sub(r"\s+", "", label) in re.sub(r"\s+", "", text):
+                    return i + 1
+    return None
 
 
 def _check_page_numbers(pdf_path: Path) -> CheckResult:

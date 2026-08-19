@@ -10,6 +10,7 @@ from typing import Any
 import yaml
 from markdown_it import MarkdownIt
 from markdown_it.token import Token
+from mdit_py_plugins.container import container_plugin
 from mdit_py_plugins.footnote import footnote_plugin
 from mdit_py_plugins.front_matter import front_matter_plugin
 from mdit_py_plugins.tasklists import tasklists_plugin
@@ -191,7 +192,11 @@ def _render_math(latex: str, display: bool) -> str:
         img = f'<img class="math-{"display" if display else "inline"}" src="data:image/svg+xml;base64,{b64}" alt=""/>'
         if display:
             return f'<div class="math-display">{img}</div>'
-        return img
+        # U+2060 WORD JOINER on both sides: glue "text + formula + punctuation"
+        # into one unbreakable unit so Pango never starts a line with the
+        # punctuation after inline math (kinsoku is lost across the
+        # inline-image boundary in narrow columns).
+        return f'<span class="math-inline-unit">&#8288;{img}&#8288;</span>'
     except Exception:
         return f"<code>${latex}$</code>"
 
@@ -228,6 +233,8 @@ def md_to_html(md_text: str) -> Conversion:
         .use(tasklists_plugin)
         .use(texmath_plugin, delimiters="dollars")
         .use(_alerts_plugin)
+        .use(container_plugin, name="abstract")
+        .use(container_plugin, name="keywords")
     )
     md.renderer.rules["fence"] = _mermaid_aware_fence(md.renderer.rules["fence"])
     _install_math_renderer(md)
@@ -343,12 +350,47 @@ def build_document(conv: Conversion) -> str:
     author = html.escape(str(meta.get("author") or ""))
     keywords = html.escape(str(meta.get("keywords") or ""))
     description = html.escape(str(meta.get("description") or meta.get("subtitle") or ""))
+    layout = str(meta.get("layout") or "").strip().lower()
+    two_column = layout in ("two-column", "two_column", "2col", "paper")
     meta_tags = (
         f'<meta name="author" content="{author}"/>'
         f'<meta name="keywords" content="{keywords}"/>'
         f'<meta name="description" content="{description}"/>'
     )
     booktitle_css = f'main.content {{ string-set: booktitle "{title}"; }}'
+    layout_css = ""
+    content_class = "content"
+    if two_column:
+        content_class = "content two-column"
+        layout_css = """
+main.content.two-column {{
+  column-count: 2;
+  column-gap: 1.6em;
+  column-fill: balance;
+}}
+main.content.two-column .abstract,
+main.content.two-column .keywords {{
+  column-span: all;
+}}
+main.content.two-column h1,
+main.content.two-column h2,
+main.content.two-column h3,
+main.content.two-column h4 {{
+  break-after: avoid;
+  page-break-after: avoid;
+}}
+main.content.two-column p {{
+  orphans: 3;
+  widows: 3;
+}}
+main.content.two-column table {{
+  width: 100%;
+}}
+main.content.two-column .highlight pre,
+main.content.two-column pre {{
+  white-space: pre-wrap;
+}}
+"""
     cover = _cover_html(meta)
     toc = _toc_html(conv.toc)
     body = conv.html
@@ -360,12 +402,12 @@ def build_document(conv: Conversion) -> str:
 <meta charset="utf-8"/>
 <title>{title}</title>
 {meta_tags}
-<style>{booktitle_css}</style>
+<style>{booktitle_css}{layout_css}</style>
 </head>
 <body>
 {cover}
 {toc}
-<main class="content">
+<main class="{content_class}">
 {body}
 </main>
 </body>

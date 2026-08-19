@@ -77,6 +77,15 @@ npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 <img src="examples/qa/ink-01.png" width="150" alt="ink"/>
 </p>
 
+## 双栏学术论文模板
+
+`imprint --new paper` 一键生成双栏学术论文：摘要/关键词通栏，正文双栏排版，标题不落页尾、表格不跨栏截断、行内公式不断行。
+
+<p align="center">
+<img src="examples/qa/paper-03.png" width="260" alt="paper 双栏正文"/>
+<img src="examples/qa/paper-04.png" width="260" alt="paper 双栏图表"/>
+</p>
+
 换肤 = 一行命令：`imprint paper.md --theme wine`；**不指定也会智能换肤**——自动分析内容气质选主题并说明理由（如周报自动用 `graphite`，论文自动用 `academic`）。
 
 ## 为什么是 Imprint
@@ -134,7 +143,7 @@ imprint-mcp
 - **GitHub 风格提示框**：`> [!NOTE]` / `[!TIP]` / `[!WARNING]` / `[!IMPORTANT]` / `[!CAUTION]` 自动渲染为印刷级彩色提示卡，见 `examples/alerts.md`
 - **Mermaid 图表**：` ```mermaid ` 代码块自动渲染为矢量图（中文正常、无限缩放），未装引擎时优雅回退代码块，见 `examples/charts.md`
 - **数学公式**：`$行内公式$` / `$$块级公式$$` 渲染为矢量 SVG（matplotlib mathtext，无数学字体依赖），见 `examples/math.md`
-- **模板系统**：`imprint --new report|book|resume|techdoc|letter` 一键起稿，模板自带对应排版气质（石墨灰报告 / 米黄书稿 / 等宽简历 / 海洋蓝技术文档 / 薰衣草信函）
+- **模板系统**：`imprint --new report|book|resume|techdoc|letter|paper` 一键起稿，模板自带对应排版气质（石墨灰报告 / 米黄书稿 / 等宽简历 / 海洋蓝技术文档 / 薰衣草信函 / 双栏学术论文）
 - **图片压缩**：`--compress` 自动降采样超大图并重编码（实测 11.7MB → 1.4MB）
 - **字体体检**：生成前自动检查主题字体本机是否可用，缺失时明确警告
 - **中文规范**：避头尾禁则、首行缩进、中英文混排、英文段落自动连字
@@ -153,7 +162,8 @@ imprint-mcp
 | 设计系统主题 | 无 | 无 | **DTCG tokens** |
 | 质检报告 0–100 | 无 | 无 | **自带** |
 | 数学公式 | 插件级 | 无 | **矢量内嵌** |
-| 模板起稿 | 无 | 无 | **5 套内置** |
+| 模板起稿 | 无 | 无 | **6 套内置** |
+| 双栏学术排版 | 无 | 无 | **内置** |
 | WCAG 对比度检查 | 无 | 无 | **内置** |
 | PDF/UA 无障碍 | 手动 | 无 | **默认** |
 
@@ -164,9 +174,11 @@ imprint-mcp
 
 ## 路线图
 
-- 更多主题：minimal / ink（线装书）
-- npm 分发 `npx imprint`
-- 双栏 / 学术模板增强
+- 更多主题（minimal / ink 已上线，22 套）
+- npm 分发 `npx imprint`（已上线）
+- 双栏 / 学术模板（已上线）
+- PyPI 发布
+- 更多双栏模板（IEEE / 公文 / 病历等）
 
 ## License
 
