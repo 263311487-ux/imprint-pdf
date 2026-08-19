@@ -134,7 +134,8 @@ def test_cli(tmp_path):
         [sys.executable, "-m", "imprint", str(src), "-o", str(out), "--report", str(tmp_path / "r.json")],
         cwd=ROOT,
         capture_output=True,
-        text=True,
+        encoding="utf-8",
+        errors="replace",
     )
     assert r.returncode == 0, r.stderr[-800:]
     assert out.exists()

@@ -17,6 +17,16 @@ from .themes import list_themes
 from .validator import validate_pdf
 
 
+def _enable_utf8_io() -> None:
+    """Windows consoles default to a legacy codepage; force UTF-8 output so
+    Chinese report text never crashes print()."""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="imprint",
@@ -64,6 +74,7 @@ def list_templates() -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
+    _enable_utf8_io()
     args = build_parser().parse_args(argv)
     if args.list_templates:
         print(list_templates())
