@@ -36,10 +36,15 @@ jobs:
 
       - name: Install system libs (Windows)
         if: runner.os == 'Windows'
+        shell: pwsh
         run: |
-          choco install gtk-runtime -y --no-progress
-          # Put the GTK runtime DLLs on PATH for the ctypes loader.
-          echo "C:\Program Files\GTK3-Runtime Win64\bin" >> "$GITHUB_PATH"
+          # The chocolatey `gtk-runtime` package ships GTK2 (too old for
+          # WeasyPrint); install the official GTK3 runtime instead.
+          $url = "https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases/download/2022-01-04/gtk3-runtime-3.24.31-2022-01-04-ts-win64.exe"
+          Invoke-WebRequest -Uri $url -OutFile "$env:TEMP\gtk3.exe"
+          Start-Process -FilePath "$env:TEMP\gtk3.exe" -ArgumentList "/S" -Wait
+          # Put the GTK3 DLLs on PATH so ctypes can find libgobject/pango.
+          echo "C:\Program Files\GTK3-Runtime Win64\bin" >> $env:GITHUB_PATH
 
       - name: Install package
         run: |
