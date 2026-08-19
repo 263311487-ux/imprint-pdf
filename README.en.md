@@ -97,9 +97,10 @@ Every run ends with a quality report:
 - **GitHub-style alerts** — `> [!NOTE]` / `[!TIP]` / `[!WARNING]` / `[!IMPORTANT]` / `[!CAUTION]` render as print-grade callout cards
 - **Mermaid diagrams** — ` ```mermaid ` fences render to vector images (Chinese labels included); graceful code-block fallback when the engine is missing
 - **Math** — `$inline$` / `$$block$$` become vector SVG via matplotlib mathtext; no LaTeX or math fonts required
-- **Starter templates** — `imprint --new report|book|resume|techdoc|letter|paper|gongwen` (the `paper` template renders a **two-column academic paper**; `gongwen` renders a **GB/T 9704 Chinese government document** with red letterhead, document number, red rule, and right-aligned signature)
+- **Starter templates** — `imprint --new report|book|resume|techdoc|letter|paper|gongwen|ieee` (the `paper` template renders a **two-column academic paper**; `ieee` renders an **IEEE-style English paper**; `gongwen` renders a **GB/T 9704 Chinese government document** with red letterhead, document number, red rule, and right-aligned signature)
 - **Two-column academic layout** — `layout: two-column` in frontmatter; headings never orphan, tables never split mid-row, inline math never breaks a line
 - **Red-header official documents** — `layout: gongwen` in frontmatter; no cover/TOC, GB/T 9704 red letterhead with ★ rule, FangSong body, right-aligned seal block
+- **English papers** — `lang: en` in frontmatter sets the document language tag for PDF/UA; `theme-font-hint` accepts multi-word font names like "Times New Roman"
 - **Image compression** — `--compress` downscales oversized images and re-encodes (measured 11.7 MB → 1.4 MB)
 - **Font health check** — warns before rendering if a theme's font slot is missing on this machine
 - **Chinese typography rules** — kinsoku, first-line indent, CJK/Latin spacing, hyphenation for English paragraphs

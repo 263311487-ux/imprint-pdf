@@ -361,6 +361,7 @@ def _gongwen_header_html(meta: dict) -> str:
 def build_document(conv: Conversion) -> str:
     meta = conv.meta
     title = html.escape(str(meta.get("title") or "Untitled"))
+    lang = html.escape(str(meta.get("lang") or "zh-CN"))
     author = html.escape(str(meta.get("author") or ""))
     keywords = html.escape(str(meta.get("keywords") or ""))
     description = html.escape(str(meta.get("description") or meta.get("subtitle") or ""))
@@ -486,7 +487,7 @@ main.content.gongwen table {
     # mark first h1 as .first so it doesn't force a blank page after the TOC
     body = re.sub(r'<h1', '<h1 class="first"', body, count=1)
     return f"""<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8"/>
 <title>{title}</title>

@@ -16,6 +16,11 @@ SIGNALS: dict[str, list[tuple[str, int]]] = {
         ("学位论文", 3), ("学术论文", 3), ("学报", 2), ("文献综述", 2),
         ("论文", 2), ("学术", 2), ("研究", 1), ("课题", 1), ("thesis", 2), ("paper", 1),
     ],
+    "ieee": [
+        ("ieee", 4), ("index terms", 4), ("conference paper", 3),
+        ("journal paper", 3), ("abstract", 1), ("introduction", 1),
+        ("conclusion", 1), ("references", 1),
+    ],
     "newspaper": [
         ("新闻", 2), ("快讯", 2), ("头条", 2), ("简报", 2), ("要闻", 2),
         ("公告", 1), ("速览", 1), ("通稿", 1),

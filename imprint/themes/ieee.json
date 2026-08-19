@@ -1,0 +1,40 @@
+{
+  "name": "ieee",
+  "description": "IEEE 会议/期刊论文风格：Times 10pt 紧凑双栏 + IEEE 蓝",
+  "tokens": {
+    "color": {
+      "ink": "#1a1a1a",
+      "paper": "#ffffff",
+      "accent": "#00629b",
+      "accent-soft": "#eef4f8",
+      "muted": "#444444",
+      "line": "#c8c8c8",
+      "code-bg": "#f5f5f5",
+      "table-head": "#eef1f4"
+    },
+    "typography": {
+      "font-serif": "\"Times New Roman\", \"Liberation Serif\", \"STIX Two Text\", \"Songti SC\", serif",
+      "font-serif-alt": "\"Times New Roman\", \"Liberation Serif\", serif",
+      "font-sans": "\"Helvetica Neue\", \"Arial\", \"Heiti SC\", sans-serif",
+      "font-mono": "\"SF Mono\", Menlo, Consolas, \"Courier New\", monospace",
+      "size-body": "10pt",
+      "size-h1": "13pt",
+      "size-h2": "11pt",
+      "size-h3": "10pt",
+      "size-small": "8.5pt",
+      "line-height": "1.45"
+    },
+    "spacing": {
+      "page-margin": "2.1cm 1.7cm 2.1cm 1.7cm",
+      "para-indent": "1.5em",
+      "para-gap": "0.15em",
+      "heading-gap": "0.7em"
+    },
+    "decoration": {
+      "h1-rule": "0.6pt solid",
+      "quote-bar": "1.2pt solid",
+      "code-radius": "2pt",
+      "cover-accent": "#00629b"
+    }
+  }
+}

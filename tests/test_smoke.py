@@ -152,6 +152,27 @@ def test_gongwen_red_header(tmp_path):
     assert report.score >= 95, report.print_table()
 
 
+def test_ieee_two_column(tmp_path):
+    """IEEE-style English two-column paper; multi-word font hint matches."""
+    from importlib.resources import files
+
+    tpl = files("imprint.templates").joinpath("ieee.md").read_text(encoding="utf-8")
+    conv = md_to_html(tpl)
+    assert conv.meta.get("layout") == "two-column"
+    assert conv.meta.get("lang") == "en"
+    html = build_document(conv)
+    assert '<html lang="en">' in html
+    assert 'class="abstract"' in html
+    css, _ = theme_css("ieee")
+    out = tmp_path / "ieee.pdf"
+    render_pdf(html, css, out)
+    report = validate_pdf(out, serif_hint="Times New Roman")
+    assert report.score >= 95, report.print_table()
+    # multi-word hint must match hyphenated PDF font names
+    theme_font = next(c for c in report.checks if c.key == "theme_fonts")
+    assert "timesnewroman" in theme_font.evidence.lower()
+
+
 def test_footnote_glyph_coverage():
     """Footnote backrefs must not use U+21A9/U+FE0E (missing in CJK fonts,
     which makes Pango fall back to LastResort = tofu in the rendered PDF)."""

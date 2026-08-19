@@ -461,15 +461,23 @@ def _check_size(size_bytes: int) -> CheckResult:
 
 def _check_theme_fonts(doc: fitz.Document, serif_hint: str) -> CheckResult:
     r = CheckResult("theme_fonts", "主题字体生效", 3)
-    hints = [h.strip().lower() for h in re.split(r"[,\"']+", serif_hint) if h.strip() and len(h.strip()) > 2]
-    names = set()
+
+    def norm(s: str) -> str:
+        # PDF font names are subset-prefixed and hyphenated ("ESSOFH+Times-New-Roman,")
+        # while hints are human names ("Times New Roman"); compare on letters/digits.
+        return re.sub(r"[^a-z0-9]", "", s.lower())
+
+    hints = [norm(h) for h in re.split(r"[,\"']+", serif_hint) if len(h.strip()) > 2]
+    names: set[str] = set()
     for page in doc:
         for f in page.get_fonts(full=True):
-            names.add(str(f[3]).lower())
+            names.add(norm(str(f[3])))
     matched = [h for h in hints if any(h in n for n in names)]
     r.passed = bool(matched)
     r.score = 3 if r.passed else 0
-    r.evidence = f"命中 {', '.join(matched[:2])}" if matched else f"未命中 {hints[:2]}"
+    r.evidence = (
+        f"命中 {', '.join(matched[:2])}" if matched else f"未命中 {serif_hint}"
+    )
     return r
 
 

@@ -3,6 +3,13 @@
 All notable changes to Imprint are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning is SemVer.
 
+## [0.11.0] - 2026-08-19
+
+### Added
+- IEEE 风格英文双栏论文模板：`imprint --new ieee` + `ieee` 主题（Times 10pt 紧凑双栏 + IEEE 蓝 #00629B）；frontmatter `lang: en` 自动切换 `<html lang>`（PDF/UA 语言标签更准确）
+- 验证器字体匹配规范化：PDF 字体名带子集前缀+连字符（`ESSOFH+Times-New-Roman,`），多词提示（Times New Roman）此前匹配失败 → 统一去非字母数字后子串匹配；`theme-font-hint` 现在对多词字体名也生效
+- 智能换肤新增 IEEE 信号（ieee / index terms / conference paper 等）
+
 ## [0.10.0] - 2026-08-19
 
 ### Added

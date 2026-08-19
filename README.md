@@ -87,6 +87,13 @@ npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 <img src="examples/qa/paper-04.png" width="260" alt="paper 双栏图表"/>
 </p>
 
+英文论文用 `imprint --new ieee`：IEEE 风格（Times 10pt 紧凑双栏 + IEEE 蓝），
+`lang: en` 自动切换文档语言标签，Abstract / Index Terms 通栏。
+
+<p align="center">
+<img src="examples/qa/ieee-03.png" width="300" alt="ieee 双栏英文论文"/>
+</p>
+
 ## 党政机关公文（GB/T 9704 红头文件）
 
 `imprint --new gongwen` 一键生成符合《党政机关公文格式》的红头文件：
@@ -154,7 +161,7 @@ imprint-mcp
 - **GitHub 风格提示框**：`> [!NOTE]` / `[!TIP]` / `[!WARNING]` / `[!IMPORTANT]` / `[!CAUTION]` 自动渲染为印刷级彩色提示卡，见 `examples/alerts.md`
 - **Mermaid 图表**：` ```mermaid ` 代码块自动渲染为矢量图（中文正常、无限缩放），未装引擎时优雅回退代码块，见 `examples/charts.md`
 - **数学公式**：`$行内公式$` / `$$块级公式$$` 渲染为矢量 SVG（matplotlib mathtext，无数学字体依赖），见 `examples/math.md`
-- **模板系统**：`imprint --new report|book|resume|techdoc|letter|paper|gongwen` 一键起稿，模板自带对应排版气质（石墨灰报告 / 米黄书稿 / 等宽简历 / 海洋蓝技术文档 / 薰衣草信函 / 双栏学术论文 / 红头公文）
+- **模板系统**：`imprint --new report|book|resume|techdoc|letter|paper|gongwen|ieee` 一键起稿，模板自带对应排版气质（石墨灰报告 / 米黄书稿 / 等宽简历 / 海洋蓝技术文档 / 薰衣草信函 / 双栏学术论文 / 红头公文 / IEEE 英文论文）
 - **图片压缩**：`--compress` 自动降采样超大图并重编码（实测 11.7MB → 1.4MB）
 - **字体体检**：生成前自动检查主题字体本机是否可用，缺失时明确警告
 - **中文规范**：避头尾禁则、首行缩进、中英文混排、英文段落自动连字
@@ -173,7 +180,7 @@ imprint-mcp
 | 设计系统主题 | 无 | 无 | **DTCG tokens** |
 | 质检报告 0–100 | 无 | 无 | **自带** |
 | 数学公式 | 插件级 | 无 | **矢量内嵌** |
-| 模板起稿 | 无 | 无 | **7 套内置** |
+| 模板起稿 | 无 | 无 | **8 套内置** |
 | 双栏学术排版 | 无 | 无 | **内置** |
 | 公文格式（红头文件） | 无 | 无 | **内置** |
 | WCAG 对比度检查 | 无 | 无 | **内置** |
