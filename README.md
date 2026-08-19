@@ -72,11 +72,15 @@ Imprint 是一个 AI 原生的中文印刷级 PDF 生成器。它把 Markdown �
 pip install imprint-pdf
 # 图表支持（可选）
 pip install imprint-pdf[charts]
+# MCP server（可选，Agent 一句话出报告）
+pip install imprint-pdf[mcp]
 
 imprint paper.md -o paper.pdf
 imprint paper.md --theme sepia --compress
 # 从模板起稿（报告/书籍/简历/技术文档/信函）
 imprint --new report -o my_report.md
+# 启动 MCP server（stdio），供 Claude Code / Cursor / DeepSeek Harness 等接入
+imprint-mcp
 ```
 
 输出结尾是一张质检报告：
@@ -117,7 +121,7 @@ imprint --new report -o my_report.md
 - **代码高亮**：Pygments 着色、整体换页不截断
 - **缺字检测**：渲染后扫描 LastResort/notdef 回退（豆腐块），脚注、箭头等符号缺字自动暴露
 - **PDF/UA**：默认输出无障碍标签版
-- **AI 原生**：CLI 一行命令；MCP server 在路线图中，Agent 一句话出报告
+- **AI 原生**：CLI 一行命令；内置 MCP server（`imprint-mcp`），Agent 一句话出报告（tools: render_markdown / list_themes / validate_pdf / new_document）
 - **对比度合规**：每套主题自动通过 WCAG 印刷检查（正文 ≥7:1、小字 ≥4.5:1、装饰 ≥3:1）
 
 ## 对比
@@ -139,7 +143,6 @@ imprint --new report -o my_report.md
 
 ## 路线图
 
-- MCP server（Agent 直接调）
 - 更多主题：minimal / ink（线装书）
 - npm 分发 `npx imprint`
 - 双栏 / 学术模板增强

@@ -39,11 +39,15 @@ Most Markdown→PDF pipelines (pandoc defaults, md2pdf, browser print) just "pou
 pip install imprint-pdf
 # charts support (optional)
 pip install imprint-pdf[charts]
+# MCP server (optional): an agent turns one sentence into a report
+pip install imprint-pdf[mcp]
 
 imprint paper.md -o paper.pdf
 imprint paper.md --theme sepia --compress
 # scaffold from a starter template (report/book/resume/techdoc/letter)
 imprint --new report -o my_report.md
+# start the MCP server (stdio) for Claude Code / Cursor / DeepSeek Harness, ...
+imprint-mcp
 ```
 
 Every run ends with a quality report:
@@ -85,7 +89,7 @@ Every run ends with a quality report:
 - **Missing-glyph detection** — scans for LastResort/notdef fallback (tofu boxes) so symbols like footnote arrows never silently break
 - **PDF/UA** — tagged, accessible PDF by default
 - **WCAG contrast** — every theme passes the print checks (body ≥ 7:1, small text ≥ 4.5:1, decoration ≥ 3:1)
-- **AI-native** — one command from the CLI; an MCP server (roadmap) lets an agent produce a report from a sentence
+- **AI-native** — one command from the CLI; a built-in MCP server (`imprint-mcp`) lets an agent produce a report from a sentence (tools: render_markdown / list_themes / validate_pdf / new_document)
 
 ## Quality report (14 checks, 100 points)
 
@@ -129,7 +133,6 @@ CI runs pytest on macOS / Linux / Windows × Python 3.10–3.12.
 
 ## Roadmap
 
-- MCP server (an agent turns one sentence into a report)
 - More themes: minimal / ink
 - npm distribution (`npx imprint`)
 - Two-column / academic template enhancements
