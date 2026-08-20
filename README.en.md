@@ -8,7 +8,7 @@
 
 Imprint is an AI-native, print-grade Chinese PDF generator. It treats Markdown as the draft and the PDF as the finished product, following publishing standards: serif body text, sans headings, 2-em first-line indents, kinsoku punctuation rules, exact TOC page numbers, repeating table headers across pages, and code blocks that never split mid-line. After every render it scores the PDF **0–100** and shows evidence for every check.
 
-[简体中文](README.md) · [Live showcase](https://263311487-ux.github.io/imprint-pdf/)
+[简体中文](README.md) · [Live showcase](https://263311487-ux.github.io/imprint-pdf/) · [▶ Live demo (no install)](https://263311487-ux.github.io/imprint-pdf/#live)
 
 <p align="center">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/imprint-pdf.svg">
