@@ -29,8 +29,8 @@ Imprint 是一个 AI 原生的中文印刷级 PDF 生成器。它把 Markdown �
 # 方式一：一行命令（自动安装引擎，跨平台）
 npx imprint-pdf 论文.md
 
-# 方式二：pip 安装（PyPI 发布前走 GitHub 源）
-pip install "imprint-pdf @ git+https://github.com/263311487-ux/imprint-pdf.git"
+# 方式二：pip 安装（已发布到 PyPI）
+pip install imprint-pdf
 imprint 论文.md
 
 # 常用命令
@@ -177,7 +177,7 @@ imprint-mcp
 - **代码高亮**：Pygments 着色、整体换页不截断
 - **缺字检测**：渲染后扫描 LastResort/notdef 回退（豆腐块），脚注、箭头等符号缺字自动暴露
 - **PDF/UA**：默认输出无障碍标签版
-- **AI 原生**：CLI 一行命令；内置 MCP server（`pip install "imprint-pdf[mcp] @ git+https://github.com/263311487-ux/imprint-pdf.git"` → `imprint-mcp`），Agent 一句话出报告（tools: render_markdown / list_themes / validate_pdf / new_document）
+- **AI 原生**：CLI 一行命令；内置 MCP server（`pip install "imprint-pdf[mcp]"` → `imprint-mcp`），Agent 一句话出报告（tools: render_markdown / list_themes / validate_pdf / new_document）
 - **对比度合规**：每套主题自动通过 WCAG 印刷检查（正文 ≥7:1、小字 ≥4.5:1、装饰 ≥3:1）
 
 ## 对比
@@ -206,7 +206,7 @@ imprint-mcp
 - 更多主题（24 套已上线：minimal / ink / gongwen / ieee 等）
 - npm 分发 `npx imprint`（已上线）
 - 双栏 / 学术模板（已上线）
-- PyPI 发布
+- [x] PyPI 发布（已上线 0.11.0）
 - 更多双栏模板（IEEE / 公文 / 病历等）
 
 ## License

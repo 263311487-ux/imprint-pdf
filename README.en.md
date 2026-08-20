@@ -26,8 +26,8 @@ Imprint is an AI-native, print-grade Chinese PDF generator. It treats Markdown a
 # One command — auto-installs the engine (cross-platform)
 npx imprint-pdf paper.md
 
-# or via pip (GitHub source until the PyPI release lands)
-pip install "imprint-pdf @ git+https://github.com/263311487-ux/imprint-pdf.git"
+# or via pip (published on PyPI)
+pip install imprint-pdf
 imprint paper.md
 
 # Common commands
@@ -57,11 +57,11 @@ Most Markdown→PDF pipelines (pandoc defaults, md2pdf, browser print) just "pou
 ## Quick start
 
 ```bash
-pip install "imprint-pdf @ git+https://github.com/263311487-ux/imprint-pdf.git"
+pip install imprint-pdf
 # charts support (optional)
-pip install "imprint-pdf[charts] @ git+https://github.com/263311487-ux/imprint-pdf.git"
+pip install "imprint-pdf[charts]"
 # MCP server (optional): an agent turns one sentence into a report
-pip install "imprint-pdf[mcp] @ git+https://github.com/263311487-ux/imprint-pdf.git"
+pip install "imprint-pdf[mcp]"
 
 imprint paper.md -o paper.pdf
 imprint paper.md --theme sepia --compress
@@ -159,7 +159,7 @@ CI runs pytest on macOS / Linux / Windows × Python 3.10–3.12.
 
 - [x] 24 themes · 8 templates · two-column papers · red-header docs · IEEE English papers
 - [x] npm distribution (`npx imprint-pdf`)
-- [ ] PyPI release (pip install imprint-pdf)
+- [x] PyPI release (0.11.0 live)
 - [ ] More templates: medical records, contracts
 
 ## License
