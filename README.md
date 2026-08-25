@@ -1,3 +1,4 @@
+<!-- mcp-name: io.github.263311487-ux/imprint-pdf -->
 # Imprint · 印记
 
 > **Markdown 进，出版社级 PDF 出，自带 0–100 印刷级质检报告。**

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.263311487-ux/imprint-pdf",
+  "title": "Imprint PDF",
+  "description": "AI-native print-grade PDF generator. Markdown in, publisher-quality PDF out.",
+  "repository": {
+    "url": "https://github.com/263311487-ux/imprint-pdf",
+    "source": "github"
+  },
+  "version": "0.14.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "imprint-pdf",
+      "version": "0.14.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
