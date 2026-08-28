@@ -210,6 +210,13 @@ imprint-mcp
 - [x] PyPI 发布（已上线 0.11.0）
 - 更多双栏模板（IEEE / 公文 / 病历等）
 
+## Related tools
+
+- [**falsify**](https://github.com/263311487-ux/falsify) — the scientific thinking protocol for AI agents. Before you typeset the perfect PDF, let falsify check the conclusion it presents: hypothesis → falsify → evidence → calibrated verdict.
+- [**dsh-verify**](https://github.com/263311487-ux/dsh-verify) — browser-verified delivery for agent-built apps: real-browser tests that catch broken output a judge cannot see.
+
+One-command installs: `npx skills add 263311487-ux/falsify` · `npx dsh-verify` · `npx imprint`
+
 ## License
 
 MIT
