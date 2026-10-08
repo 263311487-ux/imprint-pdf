@@ -24,10 +24,10 @@ Imprint 是一个 AI 原生的中文印刷级 PDF 生成器。它把 Markdown �
 > **▶ 不想装？直接在线试玩：** [在浏览器里粘贴 Markdown → 生成印刷级 PDF + 0–100 质检分](https://263311487-ux.github.io/imprint-pdf/#live)（免费，限 20 次/小时/IP）
 
 
-## 快速开始（零配置）
+## 快速开始（需先准备平台依赖）
 
 ```bash
-# 方式一：一行命令（自动安装引擎，跨平台）
+# 方式一：npm 包装器（首次可能联网安装 Python 引擎）
 npx imprint-pdf 论文.md
 
 # 方式二：pip 安装（已发布到 PyPI）
@@ -39,6 +39,14 @@ npx imprint-pdf --new report     # 从模板起稿
 npx imprint-pdf --list-themes    # 24 套主题
 npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 ```
+
+### 首次成功与平台依赖
+
+先运行 `python3 -m imprint --version`，应输出 `imprint 0.14.0`；再运行 `python3 -m imprint examples/sample.md --out sample.pdf` 完成离线样例。需要 Python 3.10+、项目依赖，以及 WeasyPrint 的原生 Pango/GLib：macOS 用 Homebrew 安装 Pango，Debian/Ubuntu 安装 `libpango-1.0-0` 与 `libpangoft2-1.0-0`，Windows 安装当前 GTK3 runtime。中文字体需由使用者自行安装。
+
+质检分数是本仓库检查项的可重复启发式评分，不是印刷厂认证；PDF/UA 行只检查 Tagged PDF 标记，并不等同于完整 PDF/UA 合规。正式发布仍需专用无障碍校验器和人工印前打样。
+
+完整安装指南和平台矩阵见 [首次成功指南](docs/first-success.md)。源码版本与注册表版本可能不同；发布前请分别核对 PyPI、npm 和 GitHub Release。
 
 ![封面](examples/qa/sample-01.png)
 
@@ -121,7 +129,7 @@ npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 
 - **中文印刷级**——严格按《中文排版需求》：避头尾禁则、首行缩进 2 字符、中英文混排字距、孤行寡行控制
 - **设计系统即主题**——每套主题是一组 DTCG 设计令牌（色板/字体配对/间距/装饰），换肤 = 换一行
-- **印刷级质检报告**——每个 PDF 生成后自动评分 0–100，检查文本可选、字体子集嵌入、标点违规、目录页码、PDF/UA 无障碍标签，证据可查
+- **印刷级质检报告**——每个 PDF 生成后自动评分 0–100，检查文本可选、字体子集嵌入、标点违规、目录页码、Tagged PDF 标记，证据可查
 
 ## 快速开始
 
@@ -177,9 +185,9 @@ imprint-mcp
 - **表格跨页**：表头自动重复、行不截断
 - **代码高亮**：Pygments 着色、整体换页不截断
 - **缺字检测**：渲染后扫描 LastResort/notdef 回退（豆腐块），脚注、箭头等符号缺字自动暴露
-- **PDF/UA**：默认输出无障碍标签版
+- **带标签 PDF**：默认请求 WeasyPrint PDF/UA-1 输出模式；完整无障碍合规仍需验证
 - **AI 原生**：CLI 一行命令；内置 MCP server（`pip install "imprint-pdf[mcp]"` → `imprint-mcp`），Agent 一句话出报告（tools: render_markdown / list_themes / validate_pdf / new_document）
-- **对比度合规**：每套主题自动通过 WCAG 印刷检查（正文 ≥7:1、小字 ≥4.5:1、装饰 ≥3:1）
+- **对比度合规**：按主题色板计算 WCAG 对比度比值（正文 ≥7:1、小字 ≥4.5:1、装饰 ≥3:1）
 
 ## 对比
 
@@ -193,7 +201,7 @@ imprint-mcp
 | 双栏学术排版 | 无 | 无 | **内置** |
 | 公文格式（红头文件） | 无 | 无 | **内置** |
 | WCAG 对比度检查 | 无 | 无 | **内置** |
-| PDF/UA 无障碍 | 手动 | 无 | **默认** |
+| 带标签 PDF 输出请求 | 可配置 | 依版本而定 | **默认请求，需独立验证** |
 
 ## 文档
 
@@ -205,9 +213,9 @@ imprint-mcp
 ## 路线图
 
 - 更多主题（24 套已上线：minimal / ink / gongwen / ieee 等）
-- npm 分发 `npx imprint`（已上线）
+- npm 分发 `npx imprint-pdf`（已上线）
 - 双栏 / 学术模板（已上线）
-- [x] PyPI 发布（已上线 0.11.0）
+- [x] PyPI 发布（注册表版本与源码可能不同）
 - 更多双栏模板（IEEE / 公文 / 病历等）
 
 ## Related tools
@@ -215,7 +223,7 @@ imprint-mcp
 - [**falsify**](https://github.com/263311487-ux/falsify) — the scientific thinking protocol for AI agents. Before you typeset the perfect PDF, let falsify check the conclusion it presents: hypothesis → falsify → evidence → calibrated verdict.
 - [**dsh-verify**](https://github.com/263311487-ux/dsh-verify) — browser-verified delivery for agent-built apps: real-browser tests that catch broken output a judge cannot see.
 
-One-command installs: `npx skills add 263311487-ux/falsify` · `npx dsh-verify` · `npx imprint`
+One-command installs: `npx skills add 263311487-ux/falsify` · `npx dsh-verify` · `npx imprint-pdf`
 
 ## License
 

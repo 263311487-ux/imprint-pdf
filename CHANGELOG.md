@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased — 0.14.0 source alignment
+
+Aligned Python and npm runtime versions with existing project/MCP metadata; added deterministic metadata checks and first-success/platform documentation. No registry publication or provider changes.
+
+
 ## [0.13.0] - 2026-08-20
 
 ### Fixed

@@ -10,10 +10,10 @@ Most "Markdown → PDF" tools stop at "the PDF rendered". Imprint stops one step
 | CJK punctuation avoidance (标点避头尾) | Chinese punctuation at the start of a line is a typographic error readers notice instantly |
 | Font embedding & coverage | Text that silently falls back to a wrong font (or renders as tofu ▯) defeats the purpose of a PDF |
 | Exact TOC page numbers (read from PDF bookmarks) | A table of contents that lies is worse than no TOC |
-| Contrast (WCAG) | Theme tokens are pre-checked, but the gate re-verifies against the actual rendered PDF |
+| Contrast (WCAG) | Computes selected theme token pairs, not every rendered page element |
 | Image resolution ≥150 DPI | Screen-only images look fine on screen and blurry in print |
 | Content overflow | Tables/code that clip at the page edge |
-| PDF/UA accessibility labels | Screen readers can read the document |
+| Tagged PDF marker | Catalog MarkInfo flag only; not full PDF/UA validation |
 | Ink coverage / line hyphens (CJK) | Aesthetic evenness professional typesetters care about |
 
 ## Why a *score* and not just pass/fail
@@ -27,3 +27,7 @@ Most "Markdown → PDF" tools stop at "the PDF rendered". Imprint stops one step
 LaTeX gives you control and no quality signal. Word gives you neither. Imprint's bet: **the tool should be opinionated about quality, and it should prove it with evidence** — not vibes.
 
 Each deduction in the report carries the *key* of the failed check and the *evidence* (e.g. "line 3 of page 2 is an orphan: `widow-orphan: line=3,page=2`"). You can see exactly what to fix, and fix it in the Markdown, not in the layout engine.
+
+## Limits
+
+100/100 means no deductions under the implemented checks. It is not certification. Use a dedicated PDF/UA validator, screen-reader review, and human print proof for production work.

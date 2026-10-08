@@ -20,7 +20,7 @@ Imprint is an AI-native, print-grade Chinese PDF generator. It treats Markdown a
   <img alt="Stars" src="https://img.shields.io/github/stars/263311487-ux/imprint-pdf">
 </p>
 
-## Quick start (zero config)
+## Quick start (after platform dependencies)
 
 ```bash
 # One command — auto-installs the engine (cross-platform)
@@ -35,6 +35,14 @@ npx imprint-pdf --new report        # scaffold from a template
 npx imprint-pdf --list-themes       # all 24 themes
 npx imprint-pdf paper.md --theme academic --out paper.pdf
 ```
+
+### First success and platform requirements
+
+[Source installation guide and platform matrix](docs/first-success.md)
+
+For a deterministic local check, run `python3 -m imprint --version` and expect `imprint 0.14.0`, then render `examples/sample.md` with `python3 -m imprint examples/sample.md --out sample.pdf`. Python 3.10+ and the package dependencies are required. WeasyPrint also loads native Pango/GLib libraries: install Pango with Homebrew on macOS, `libpango-1.0-0` and `libpangoft2-1.0-0` on Debian/Ubuntu, or a current GTK3 runtime on Windows. A real render may still need a CJK font installed by the operator.
+
+The quality report is a repeatable heuristic score (0–100) over the checks implemented in this repository. It is evidence for review, not a print-house certification. The PDF/UA row checks the marked-PDF flag only; it does not certify full PDF/UA conformance. Use a dedicated accessibility validator and human print proof for production release.
 
 ![Cover](examples/qa/sample-01.png)
 
@@ -111,8 +119,8 @@ Every run ends with a quality report:
 - **Cross-page tables** — header row repeats, rows never split
 - **Code highlighting** — Pygments colors; blocks move to a fresh page instead of splitting
 - **Missing-glyph detection** — scans for LastResort/notdef fallback (tofu boxes) so symbols like footnote arrows never silently break
-- **PDF/UA** — tagged, accessible PDF by default
-- **WCAG contrast** — every theme passes the print checks (body ≥ 7:1, small text ≥ 4.5:1, decoration ≥ 3:1)
+- **Tagged PDF** — requests WeasyPrint PDF/UA-1 output; full conformance requires independent validation
+- **WCAG contrast** — computes selected theme color-pair ratios (body ≥ 7:1, small text ≥ 4.5:1, decoration ≥ 3:1)
 - **AI-native** — one command from the CLI; a built-in MCP server (`imprint-mcp`) lets an agent produce a report from a sentence (tools: render_markdown / list_themes / validate_pdf / new_document)
 
 ## Quality report (14 checks, 100 points)
@@ -143,7 +151,7 @@ Every run ends with a quality report:
 | math | plugin | none | **vector, embedded** |
 | starter templates | none | none | **8 built-in** |
 | WCAG contrast | none | none | **built-in** |
-| PDF/UA accessible | manual | none | **default** |
+| Tagged PDF output request | configurable | version-dependent | **default request; validate independently** |
 
 ## Development
 
@@ -159,7 +167,7 @@ CI runs pytest on macOS / Linux / Windows × Python 3.10–3.12.
 
 - [x] 24 themes · 8 templates · two-column papers · red-header docs · IEEE English papers
 - [x] npm distribution (`npx imprint-pdf`)
-- [x] PyPI release (0.11.0 live)
+- [x] PyPI release (registry versions may differ from source)
 - [ ] More templates: medical records, contracts
 
 ## License

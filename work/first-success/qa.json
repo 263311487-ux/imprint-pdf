@@ -1,0 +1,121 @@
+{
+  "score": 100.0,
+  "grade": "A+",
+  "pages": 9,
+  "size_bytes": 301358,
+  "checks": [
+    {
+      "key": "text_selectable",
+      "label": "文本可选",
+      "max": 15,
+      "score": 15,
+      "passed": true,
+      "evidence": "平均每页 722 字符"
+    },
+    {
+      "key": "fonts_embedded",
+      "label": "字体子集嵌入",
+      "max": 15,
+      "score": 15.0,
+      "passed": true,
+      "evidence": "6/6 字体已嵌入"
+    },
+    {
+      "key": "metadata",
+      "label": "元数据完整",
+      "max": 3,
+      "score": 3.0,
+      "passed": true,
+      "evidence": "标题「印记」"
+    },
+    {
+      "key": "punctuation",
+      "label": "标点避头尾",
+      "max": 15,
+      "score": 15.0,
+      "passed": true,
+      "evidence": "0 违规"
+    },
+    {
+      "key": "widows_orphans",
+      "label": "孤行寡行",
+      "max": 9,
+      "score": 9,
+      "passed": true,
+      "evidence": "0 处"
+    },
+    {
+      "key": "toc",
+      "label": "目录页码",
+      "max": 15,
+      "score": 15,
+      "passed": true,
+      "evidence": "核对 15 条"
+    },
+    {
+      "key": "page_numbers",
+      "label": "页码存在",
+      "max": 2,
+      "score": 2,
+      "passed": true,
+      "evidence": "8/9 页含页码"
+    },
+    {
+      "key": "pdf_ua",
+      "label": "PDF/UA 标签",
+      "max": 3,
+      "score": 3,
+      "passed": true,
+      "evidence": "Tagged PDF"
+    },
+    {
+      "key": "size",
+      "label": "文件体积",
+      "max": 0,
+      "score": 0.0,
+      "passed": true,
+      "evidence": "294 KB"
+    },
+    {
+      "key": "theme_fonts",
+      "label": "主题字体生效",
+      "max": 3,
+      "score": 3,
+      "passed": true,
+      "evidence": "命中 songti"
+    },
+    {
+      "key": "contrast",
+      "label": "主题对比度",
+      "max": 5,
+      "score": 5.0,
+      "passed": true,
+      "evidence": "正文 ink/paper 17.0:1 · 小字 muted/paper 5.0:1 · 背景文字 ink/soft 15.1:1 · 装饰 accent/paper 5.7:1"
+    },
+    {
+      "key": "glyph_coverage",
+      "label": "缺字检测",
+      "max": 5,
+      "score": 5,
+      "passed": true,
+      "evidence": "无缺字回退"
+    },
+    {
+      "key": "overflow",
+      "label": "内容溢出",
+      "max": 5,
+      "score": 5.0,
+      "passed": true,
+      "evidence": "无内容越界"
+    },
+    {
+      "key": "image_dpi",
+      "label": "图片清晰度",
+      "max": 5,
+      "score": 5.0,
+      "passed": true,
+      "evidence": "全部达标"
+    }
+  ],
+  "violations": []
+}
