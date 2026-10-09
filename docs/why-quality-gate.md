@@ -18,7 +18,7 @@ Most "Markdown → PDF" tools stop at "the PDF rendered". Imprint stops one step
 
 ## Why a *score* and not just pass/fail
 
-- **For humans**: a single number tells you "this is ready to send" vs "keep fixing". 100/100 is a hard, achievable bar (Imprint's own test corpus runs 100/100).
+- **For humans**: the score helps prioritize inspection; a perfect score is not release approval.
 - **For AI agents**: the MCP server returns the score + a list of failed checks with machine-readable keys, so an agent can iterate: render → read report → fix → re-render. This turns document generation into a *closed loop* instead of a blind one-shot.
 - **For CI**: `imprint doc.md --report qa.json` gives CI a quality gate. Same philosophy as linting for code, but for documents.
 

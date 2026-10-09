@@ -16,3 +16,6 @@ dist/
 # Generated PDFs (regenerate with `imprint`)
 examples/*.pdf
 npm/*.tgz
+
+# Local verification evidence lives outside version control
+work/

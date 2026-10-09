@@ -42,7 +42,7 @@ npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 
 ### 首次成功与平台依赖
 
-先运行 `python3 -m imprint --version`，应输出 `imprint 0.14.0`；再运行 `python3 -m imprint examples/sample.md --out sample.pdf` 完成离线样例。需要 Python 3.10+、项目依赖，以及 WeasyPrint 的原生 Pango/GLib：macOS 用 Homebrew 安装 Pango，Debian/Ubuntu 安装 `libpango-1.0-0` 与 `libpangoft2-1.0-0`，Windows 安装当前 GTK3 runtime。中文字体需由使用者自行安装。
+以下仅用于已安装本源码的仓库根目录（pip 包不含顶层 examples）：先运行 `python3 -m imprint --version`，应输出 `imprint 0.14.0`；再运行 `python3 -m imprint examples/sample.md --out sample.pdf` 完成离线样例。需要 Python 3.10+、项目依赖，以及 WeasyPrint 的原生 Pango/GLib：macOS 用 Homebrew 安装 Pango，Debian/Ubuntu 安装 `libpango-1.0-0` 与 `libpangoft2-1.0-0`，Windows 安装当前 GTK3 runtime。中文字体需由使用者自行安装。
 
 质检分数是本仓库检查项的可重复启发式评分，不是印刷厂认证；PDF/UA 行只检查 Tagged PDF 标记，并不等同于完整 PDF/UA 合规。正式发布仍需专用无障碍校验器和人工印前打样。
 
@@ -111,9 +111,9 @@ npx imprint-pdf 论文.md --theme academic --out 论文.pdf
 <img src="examples/qa/ieee-03.png" width="300" alt="ieee 双栏英文论文"/>
 </p>
 
-## 党政机关公文（GB/T 9704 红头文件）
+## 公文风格模板（不宣称 GB/T 9704 合规）
 
-`imprint --new gongwen` 一键生成符合《党政机关公文格式》的红头文件：
+`imprint --new gongwen` 生成公文风格草稿（未按 GB/T 9704 全项验证，不宣称标准合规）：
 红色发文机关标志、发文字号、红色分隔线（★）、黑体标题、仿宋三号正文、
 右对齐落款与成文日期。
 
@@ -160,7 +160,7 @@ imprint-mcp
  ✓ 孤行寡行               9.0/9.0    0 处
  ✓ 目录页码              15.0/15.0   核对 15 条
  ✓ 页码存在               2.0/2.0    8/9 页含页码
- ✓ PDF/UA 标签          3.0/3.0    Tagged PDF
+ ✓ Tagged PDF 标记          3.0/3.0    Tagged PDF
  ✓ 主题字体生效             3.0/3.0    命中 songti
  ✓ 主题对比度              5.0/5.0    正文 17.0:1 …
  ✓ 缺字检测               5.0/5.0    无缺字回退
@@ -189,19 +189,9 @@ imprint-mcp
 - **AI 原生**：CLI 一行命令；内置 MCP server（`pip install "imprint-pdf[mcp]"` → `imprint-mcp`），Agent 一句话出报告（tools: render_markdown / list_themes / validate_pdf / new_document）
 - **对比度合规**：按主题色板计算 WCAG 对比度比值（正文 ≥7:1、小字 ≥4.5:1、装饰 ≥3:1）
 
-## 对比
+## 能力边界
 
-| | pandoc 默认 | Chrome 打印 | Imprint |
-|---|---|---|---|
-| 中文印刷级 | 弱 | 弱 | **按规范** |
-| 设计系统主题 | 无 | 无 | **DTCG tokens** |
-| 质检报告 0–100 | 无 | 无 | **自带** |
-| 数学公式 | 插件级 | 无 | **矢量内嵌** |
-| 模板起稿 | 无 | 无 | **8 套内置** |
-| 双栏学术排版 | 无 | 无 | **内置** |
-| 公文格式（红头文件） | 无 | 无 | **内置** |
-| WCAG 对比度检查 | 无 | 无 | **内置** |
-| 带标签 PDF 输出请求 | 可配置 | 依版本而定 | **默认请求，需独立验证** |
+Imprint 组合了 Markdown 排版、主题与启发式检查。其他工具的能力依版本和插件配置而异；本项目没有受控竞品测试，不作绝对优劣比较。
 
 ## 文档
 

@@ -40,7 +40,7 @@ npx imprint-pdf paper.md --theme academic --out paper.pdf
 
 [Source installation guide and platform matrix](docs/first-success.md)
 
-For a deterministic local check, run `python3 -m imprint --version` and expect `imprint 0.14.0`, then render `examples/sample.md` with `python3 -m imprint examples/sample.md --out sample.pdf`. Python 3.10+ and the package dependencies are required. WeasyPrint also loads native Pango/GLib libraries: install Pango with Homebrew on macOS, `libpango-1.0-0` and `libpangoft2-1.0-0` on Debian/Ubuntu, or a current GTK3 runtime on Windows. A real render may still need a CJK font installed by the operator.
+From an installed source checkout root (the wheel does not include top-level examples), run `python3 -m imprint --version` and expect `imprint 0.14.0`, then render `examples/sample.md` with `python3 -m imprint examples/sample.md --out sample.pdf`. Python 3.10+ and the package dependencies are required. WeasyPrint also loads native Pango/GLib libraries: install Pango with Homebrew on macOS, `libpango-1.0-0` and `libpangoft2-1.0-0` on Debian/Ubuntu, or a current GTK3 runtime on Windows. A real render may still need a CJK font installed by the operator.
 
 The quality report is a repeatable heuristic score (0–100) over the checks implemented in this repository. It is evidence for review, not a print-house certification. The PDF/UA row checks the marked-PDF flag only; it does not certify full PDF/UA conformance. Use a dedicated accessibility validator and human print proof for production release.
 
@@ -91,7 +91,7 @@ Every run ends with a quality report:
  ✓ 孤行寡行               9.0/9.0    0 处
  ✓ 目录页码              15.0/15.0   核对 15 条
  ✓ 页码存在               2.0/2.0    8/9 页含页码
- ✓ PDF/UA 标签          3.0/3.0    Tagged PDF
+ ✓ Tagged PDF 标记          3.0/3.0    Tagged PDF
  ✓ 主题字体生效             3.0/3.0    命中 songti
  ✓ 主题对比度              5.0/5.0    正文 17.0:1 …
  ✓ 缺字检测               5.0/5.0    无缺字回退
@@ -109,9 +109,9 @@ Every run ends with a quality report:
 - **GitHub-style alerts** — `> [!NOTE]` / `[!TIP]` / `[!WARNING]` / `[!IMPORTANT]` / `[!CAUTION]` render as print-grade callout cards
 - **Mermaid diagrams** — ` ```mermaid ` fences render to vector images (Chinese labels included); graceful code-block fallback when the engine is missing
 - **Math** — `$inline$` / `$$block$$` become vector SVG via matplotlib mathtext; no LaTeX or math fonts required
-- **Starter templates** — `imprint --new report|book|resume|techdoc|letter|paper|gongwen|ieee` (the `paper` template renders a **two-column academic paper**; `ieee` renders an **IEEE-style English paper**; `gongwen` renders a **GB/T 9704 Chinese government document** with red letterhead, document number, red rule, and right-aligned signature)
+- **Starter templates** — `imprint --new report|book|resume|techdoc|letter|paper|gongwen|ieee` (the `paper` template renders a **two-column academic paper**; `ieee` renders an **IEEE-style English paper**; `gongwen` renders a **Chinese official-document-style draft, not certified GB/T 9704 compliance** with red letterhead, document number, red rule, and right-aligned signature)
 - **Two-column academic layout** — `layout: two-column` in frontmatter; headings never orphan, tables never split mid-row, inline math never breaks a line
-- **Red-header official documents** — `layout: gongwen` in frontmatter; no cover/TOC, GB/T 9704 red letterhead with ★ rule, FangSong body, right-aligned seal block
+- **Red-header official documents** — `layout: gongwen` in frontmatter; no cover/TOC, unverified official-style red letterhead with ★ rule, FangSong body, right-aligned seal block
 - **English papers** — `lang: en` in frontmatter sets the document language tag for PDF/UA; `theme-font-hint` accepts multi-word font names like "Times New Roman"
 - **Image compression** — `--compress` downscales oversized images and re-encodes (measured 11.7 MB → 1.4 MB)
 - **Font health check** — warns before rendering if a theme's font slot is missing on this machine
@@ -134,31 +134,24 @@ Every run ends with a quality report:
 | widows_orphans | 9 | no heading stranded at page bottom |
 | metadata | 3 | PDF has a title |
 | theme_fonts | 3 | the theme's fonts actually got used |
-| pdf_ua | 3 | tagged, accessible PDF |
+| pdf_ua | 3 | MarkInfo Tagged PDF flag only |
+| size | 0 | output size recorded as evidence |
 | page_numbers | 2 | page numbers present |
 | contrast | 5 | WCAG contrast in print |
 | glyph_coverage | 5 | no missing-glyph fallback (tofu) |
 | overflow | 5 | no content past the page edge |
 | image_dpi | 5 | embedded images ≥ 150 DPI |
 
-## Comparison
+## Capability scope
 
-| | pandoc default | browser print | Imprint |
-|---|---|---|---|
-| Chinese print-grade | weak | weak | **spec-compliant** |
-| design-system themes | none | none | **DTCG tokens** |
-| 0–100 quality report | none | none | **built-in** |
-| math | plugin | none | **vector, embedded** |
-| starter templates | none | none | **8 built-in** |
-| WCAG contrast | none | none | **built-in** |
-| Tagged PDF output request | configurable | version-dependent | **default request; validate independently** |
+Imprint combines Markdown rendering, themes and a heuristic report. Other tools have configurable capabilities that vary by version and plugins; this repository has not run a controlled competitor benchmark.
 
 ## Development
 
 ```bash
 python -m venv .venv && .venv/bin/pip install -e ".[charts]" pytest
 .venv/bin/python -m pytest tests/
-.venv/bin/python -m imprint examples/sample.md   # expect 100/100 A+
+.venv/bin/python -m imprint examples/sample.md   # inspect actual report and PDF; scores depend on fonts/runtime
 ```
 
 CI runs pytest on macOS / Linux / Windows × Python 3.10–3.12.
