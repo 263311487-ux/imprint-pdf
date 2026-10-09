@@ -205,7 +205,7 @@ footer a{color:var(--muted)}
     </div>
     <div class="terminal reveal">
       <div class="dots"><span></span><span></span><span></span></div>
-      <code><span class="cmt"># One command. No config. Cross-platform.</span>
+      <code><span class="cmt"># After Python, Pango and fonts are installed.</span>
 $ npx imprint-pdf paper.md
 <span class="out">✓ 文本可选 15.0/15.0 · 字体嵌入 10.0/10.0 · 标点避头尾 10.0/10.0 · 目录页码 10.0/10.0 …
 ✓ <b>总分 100.0/100 · 等级 A+ · 9 页</b></span></code>
@@ -228,7 +228,7 @@ $ npx imprint-pdf paper.md
   <div class="wrap">
     <div class="sec-kicker reveal">How it works</div>
     <h2 class="reveal">From draft to finished document</h2>
-    <p class="lead reveal">Imprint is built for the AI-native workflow: you keep writing in Markdown, it handles everything that makes a document feel <em>printed</em>, and it proves the result with a machine-readable quality report.</p>
+    <p class="lead reveal">Imprint is built for the AI-native workflow: you keep writing in Markdown, it handles everything that makes a document feel <em>printed</em>, and it supplies a machine-readable heuristic quality report.</p>
     <div class="steps reveal">
       <div class="step">
         <div class="n">01</div>
@@ -243,7 +243,7 @@ $ npx imprint-pdf paper.md
       <div class="step">
         <div class="n">03</div>
         <h3>It scores itself 0–100</h3>
-        <p>14 checks — fonts, metadata, punctuation, TOC accuracy, contrast, glyphs, overflow, image DPI, PDF/UA tags — each with evidence, printed to your terminal.</p>
+        <p>14 checks — fonts, metadata, punctuation, TOC accuracy, contrast, glyphs, overflow, image DPI, Tagged PDF flag — each with evidence, printed to your terminal.</p>
       </div>
     </div>
   </div>
@@ -252,8 +252,8 @@ $ npx imprint-pdf paper.md
 <section id="themes">
   <div class="wrap">
     <div class="sec-kicker reveal">Design system themes</div>
-    <h2 class="reveal">24 themes. Every one passes print quality checks.</h2>
-    <p class="lead reveal">Each theme is a set of DTCG design tokens — palette, type pairing, spacing, decoration. Every theme passes automated WCAG print-contrast checks (body ≥ 7:1, small text ≥ 4.5:1). All thumbnails below are real rendered pages.</p>
+    <h2 class="reveal">24 themes, with inspectable sample renders.</h2>
+    <p class="lead reveal">Each theme is a set of DTCG design tokens — palette, type pairing, spacing, decoration. The validator checks selected theme color pairs (body ≥ 7:1, small text ≥ 4.5:1); inspect your actual output. All thumbnails below are real rendered pages.</p>
     <div class="gal reveal">
       <div class="t"><img src="qa/modern-01.png" alt="modern theme" loading="lazy"><div class="tn"><b>modern</b><span class="cn">现代杂志</span></div></div>
       <div class="t"><img src="qa/academic-01.png" alt="academic theme" loading="lazy"><div class="tn"><b>academic</b><span class="cn">学术书卷</span></div></div>
@@ -305,22 +305,22 @@ $ npx imprint-pdf paper.md
   <div class="wrap">
     <div class="sec-kicker reveal">The quality gate</div>
     <h2 class="reveal">A PDF is finished when it scores itself.</h2>
-    <p class="lead reveal">Every render runs 14 automated checks and prints a 0–100 report. No silent PDFs. You always know exactly what passed, what didn't, and why.</p>
+    <p class="lead reveal">Every render runs 14 automated checks and prints a 0–100 report. The report describes implemented checks; it does not cover every layout or accessibility issue.</p>
     <div class="checks reveal">
       <div class="ck"><span class="mark">✓</span><div><b>Text is selectable</b><span>Never a scanned image pretending to be a document.</span></div></div>
       <div class="ck"><span class="mark">✓</span><div><b>Fonts are subset-embedded</b><span>Renders correctly on any machine.</span></div></div>
       <div class="ck"><span class="mark">✓</span><div><b>Metadata complete</b><span>Title, author and dates set in the file.</span></div></div>
       <div class="ck"><span class="mark">✓</span><div><b>Kinsoku punctuation rules</b><span>No punctuation at the start of a line.</span></div></div>
-      <div class="ck"><span class="mark">✓</span><div><b>No widows / orphans</b><span>Headings and lines never dangle.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>No widows / orphans</b><span>Flags selected heading and line-placement issues.</span></div></div>
       <div class="ck"><span class="mark">✓</span><div><b>TOC page numbers exact</b><span>Clickable entries match real pages.</span></div></div>
       <div class="ck"><span class="mark">✓</span><div><b>Page numbers correct</b><span>Every page, in order.</span></div></div>
       <div class="ck"><span class="mark">✓</span><div><b>Tagged PDF marker (not PDF/UA certification)</b><span>Checks only MarkInfo; reading order and screen-reader use need independent validation.</span></div></div>
-      <div class="ck"><span class="mark">✓</span><div><b>File size sane</b><span>No accidental 200 MB exports.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>File size sane</b><span>Reports bytes; informational, zero points.</span></div></div>
       <div class="ck"><span class="mark">✓</span><div><b>Theme fonts really used</b><span>The design system is honored in the output.</span></div></div>
       <div class="ck"><span class="mark">✓</span><div><b>WCAG contrast</b><span>Body ≥ 7:1, small text ≥ 4.5:1, decorative ≥ 3:1.</span></div></div>
       <div class="ck"><span class="mark">✓</span><div><b>No missing glyphs</b><span>LastResort / tofu blocks are detected and surfaced.</span></div></div>
       <div class="ck"><span class="mark">✓</span><div><b>No content overflow</b><span>Nothing spills past the page.</span></div></div>
-      <div class="ck"><span class="mark">✓</span><div><b>Image DPI sufficient</b><span>Prints crisp, never pixelated.</span></div></div>
+      <div class="ck"><span class="mark">✓</span><div><b>Image DPI sufficient</b><span>Flags embedded raster images below the configured DPI threshold.</span></div></div>
     </div>
   </div>
 </section>
@@ -361,7 +361,7 @@ imprint-mcp            # stdio MCP server</code></pre>
           <li><b>pip</b> — <code>pip install "imprint-pdf @ git+…"</code></li>
           <li><b>MCP</b> — <code>pip install "imprint-pdf[mcp]"</code></li>
           <li><b>Smart skin</b> — theme auto-recommended from content</li>
-          <li><b>Honest fonts</b> — warns when a font is missing, never silently substitutes</li>
+          <li><b>Honest fonts</b> — warns when configured font slots are missing; inspect fallback output</li>
         </ul>
       </div>
     </div>
@@ -424,7 +424,7 @@ imprint-mcp            # stdio MCP server</code></pre>
     <div class="reveal">
       <details>
         <summary>What makes Imprint different from a Markdown-to-PDF converter?</summary>
-        <p>Imprint offers: cover and clickable TOC with exact page numbers, 2-em first-line indents, kinsoku line-breaking, widow/orphan control, tables that repeat their header across pages, code that never splits mid-line — then scores the output 0–100 with evidence for each check.</p>
+        <p>Imprint offers: cover and clickable TOC with exact page numbers, 2-em first-line indents, kinsoku line-breaking, widow/orphan control, tables that repeat their header across pages, code-block layout rules — then scores the output 0–100 with evidence for each check.</p>
       </details>
       <details>
         <summary>Why 97/100 for the red-header document, not 100?</summary>
