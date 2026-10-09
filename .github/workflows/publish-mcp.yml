@@ -2,8 +2,10 @@ name: Publish to MCP Registry
 
 on:
   workflow_dispatch:
-  push:
-    tags: ["v*"]
+
+# Registry entries are immutable by version. Publishing is manual so a tag
+# pointing at an already registered version cannot repeatedly fail with a
+# duplicate-version response. Bump server.json first, then run this workflow.
 
 jobs:
   publish:
