@@ -1,8 +1,8 @@
 # Changelog
 
-## Unreleased — 0.14.0 source alignment
+## [0.14.0] - 2026-10-09
 
-Aligned Python and npm runtime versions with existing project/MCP metadata; added deterministic metadata checks and first-success/platform documentation. No registry publication or provider changes.
+Aligned Python, npm wrapper, and MCP source metadata; added deterministic metadata checks and first-success/platform documentation. The GitHub source release and npm package are published. PyPI already contained version 0.14.0 before this source release; this did not replace that wheel. No provider behavior changed.
 
 
 ## [0.13.0] - 2026-08-20

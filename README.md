@@ -7,7 +7,7 @@
   <a href="https://263311487-ux.github.io/imprint-pdf/"><img src="docs/social-preview.png" alt="Imprint · 印记 — Markdown 进，出版社级 PDF 出"></a>
 </p>
 
-[English](README.en.md) · [简体中文](README.md) · [✨ 在线画廊 / Live showcase](https://263311487-ux.github.io/imprint-pdf/) · [▶ 在线试玩 / Live demo](https://263311487-ux.github.io/imprint-pdf/#live)
+[English](README.en.md) · [简体中文](README.md) · [在线画廊与演示](https://263311487-ux.github.io/imprint-pdf/) · [本地生成指南](docs/first-success.md)
 
 Imprint 是一个 AI 原生的中文印刷级 PDF 生成器。它把 Markdown 当成草稿，把 PDF 当成成品——按出版物的标准排版：宋体正文、黑体标题、首行缩进、标点避头尾、目录页码精确、表格跨页重复表头、代码不截断。生成之后，机器自动给这份 PDF 打分：**0–100 印刷级评分，逐项给出证据**。
 
@@ -21,7 +21,7 @@ Imprint 是一个 AI 原生的中文印刷级 PDF 生成器。它把 Markdown �
   <img alt="Stars" src="https://img.shields.io/github/stars/263311487-ux/imprint-pdf">
 </p>
 
-> **▶ 不想装？直接在线试玩：** [在浏览器里粘贴 Markdown → 生成印刷级 PDF + 0–100 质检分](https://263311487-ux.github.io/imprint-pdf/#live)（免费，限 20 次/小时/IP）
+> **在线演示可用性有限。** 提交的 Markdown 会发送到临时托管服务器进行渲染；请勿上传私密或敏感文档。需要处理私密内容时，请按[本地生成指南](docs/first-success.md)在本机运行。
 
 
 ## 快速开始（需先准备平台依赖）

@@ -399,21 +399,22 @@ imprint-mcp            # stdio MCP server</code></pre>
 
 <section id="live">
   <div class="wrap">
-    <div class="sec-kicker reveal">Live demo · 在线试玩</div>
-    <h2 class="reveal">Paste Markdown. Get a publisher-grade PDF.</h2>
-    <p class="lead reveal">No install, no account. A real server renders your document and scores it 0–100 on print quality. Takes ~10–60s; free tier caps 20 renders/hour/IP.</p>
+    <div class="sec-kicker reveal">Optional hosted demo · 在线演示</div>
+    <h2 class="reveal">Paste Markdown. Get a sample PDF.</h2>
+    <p class="lead reveal">Submitted Markdown is sent to a temporary server for rendering. Do not upload private or sensitive documents. Availability and render limits may change; use the local guide for private files.</p>
     <div class="live-grid reveal">
       <div class="live-left">
         <div class="live-bar">
           <select id="live-theme" aria-label="theme"></select>
           <button id="live-go" class="btn btn-primary">Generate PDF</button>
         </div>
-        <textarea id="live-md" spellcheck="false" placeholder="# 写点什么…"></textarea>
+        <textarea id="live-md" aria-label="Markdown to send to demo server" spellcheck="false" placeholder="# 写点什么…"></textarea>
       </div>
-      <div class="live-right" id="live-result">
+      <div class="live-right" id="live-result" aria-live="polite">
         <div class="live-empty">Your quality report will appear here.<br><span>score · pages · theme · download</span></div>
       </div>
     </div>
+    <p class="lead"><a href="https://github.com/263311487-ux/imprint-pdf/blob/main/docs/first-success.md">Local rendering guide for private documents</a></p>
   </div>
 </section>
 
@@ -440,7 +441,7 @@ imprint-mcp            # stdio MCP server</code></pre>
       </details>
       <details>
         <summary>Is it free / open source?</summary>
-        <p>MIT licensed, free forever, no accounts, no cloud. Everything runs locally.</p>
+        <p>MIT licensed. The command-line renderer runs on your machine. The optional hosted demo sends submitted Markdown to its temporary rendering server.</p>
       </details>
     </div>
   </div>
@@ -459,80 +460,55 @@ imprint-mcp            # stdio MCP server</code></pre>
   </div>
 </footer>
 
+
 <script>
 const LIVE_API = 'https://comply-prefix-detection-lodging.trycloudflare.com';
-const DEFAULT_MD = `---
-title: 实时渲染示例
-author: Imprint
----
-
-# 你好，Imprint
-
-这是一份**在线实时渲染**的示例文档。你改左边，它出右边——出版社级排版：宋体正文、首行缩进、标点避头尾。
-
-## 数学公式
-
-质能方程 $E=mc^2$，以及块级公式：
-
-$$\int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}$$
-
-## 表格
-
-| 项目 | 分值 |
-|---|---|
-| 印刷级质检 | 0–100 |
-| 主题数量 | 24 |
-| 模板 | 8 套 |
-
-> 生成后自动评分，每项扣分都给出证据。
-`;
+const DEFAULT_MD = '# Hello, Imprint\n\nPublic demo sample.\n';
 const $ = s => document.querySelector(s);
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc = s => String(s).replace(/[&<>\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
+let downloadUrl;
 (async () => {
-  const md = $('#live-md'); if (!md) return;
+  const md = $('#live-md');
+  if (!md) return;
   md.value = DEFAULT_MD;
   const sel = $('#live-theme');
   try {
-    const r = await fetch(LIVE_API + '/themes');
+    const r = await fetch(LIVE_API + '/themes', {signal: AbortSignal.timeout(10000)});
+    if (!r.ok) throw new Error('Theme list unavailable');
     const data = await r.json();
     (data.themes || []).forEach(t => {
       const o = document.createElement('option'); o.value = t; o.textContent = t;
       sel.appendChild(o);
     });
-  } catch (e) { /* keep auto */ }
+  } catch (e) {
+    const o = document.createElement('option'); o.value = 'auto'; o.textContent = 'auto';
+    sel.appendChild(o);
+  }
   $('#live-go').addEventListener('click', async () => {
     const btn = $('#live-go'); const box = $('#live-result');
+    if (downloadUrl) URL.revokeObjectURL(downloadUrl);
     btn.disabled = true; btn.textContent = 'Rendering…';
-    box.innerHTML = '<div class="live-status">渲染中，通常 10–60 秒…</div>';
+    box.innerHTML = '<div class="live-status">Rendering on the temporary demo server…</div>';
     try {
       const resp = await fetch(LIVE_API + '/render', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        signal: AbortSignal.timeout(75000),
         body: JSON.stringify({ markdown: md.value, theme: sel.value || 'auto' })
       });
-      if (!resp.ok) {
-        const txt = (await resp.text()).slice(0, 200);
-        throw new Error(resp.status === 429 ? '达到免费额度（20 次/小时/IP），稍后再试' : (txt || ('HTTP ' + resp.status)));
-      }
-      const score = resp.headers.get('X-Imprint-Score');
-      const pages = resp.headers.get('X-Imprint-Pages');
-      const theme = resp.headers.get('X-Imprint-Theme');
-      const blob = await resp.blob();
-      const url = URL.createObjectURL(blob);
-      box.innerHTML = `
-        <div class="live-metric"><span class="live-score">${esc(score)}<small>/100</small></span>
-          <span class="live-tag">${esc(pages)} 页</span><span class="live-tag">${esc(theme)}</span></div>
-        <div class="live-status ok">印刷级质检通过（分数 ≥ 80 即为出版级）。</div>
-        <a id="live-dl" class="btn btn-ghost" href="${url}" download="imprint.pdf">⬇ 下载 PDF</a>`;
+      if (!resp.ok) throw new Error(resp.status === 429 ? 'Demo limit reached; try later.' : ('Render failed (HTTP ' + resp.status + ')'));
+      if (!(resp.headers.get('Content-Type') || '').includes('application/pdf')) throw new Error('Demo returned an unexpected format. Try local rendering.');
+      const score = resp.headers.get('X-Imprint-Score') || '—';
+      const pages = resp.headers.get('X-Imprint-Pages') || '—';
+      const theme = resp.headers.get('X-Imprint-Theme') || sel.value || 'auto';
+      downloadUrl = URL.createObjectURL(await resp.blob());
+      box.innerHTML = `<div class="live-metric"><span class="live-score">${esc(score)}<small>/100</small></span><span class="live-tag">${esc(pages)} 页</span><span class="live-tag">${esc(theme)}</span></div><div class="live-status ok">Heuristic report only; not a print-quality certification.</div><a id="live-dl" class="btn btn-ghost" href="${downloadUrl}" download="imprint.pdf">Download PDF</a>`;
     } catch (e) {
-      box.innerHTML = '<div class="live-status err">' + esc(e.message) + '</div>';
+      box.innerHTML = '<div class="live-status err">Demo unavailable. Try later or use the local rendering guide.</div>';
     } finally {
       btn.disabled = false; btn.textContent = 'Generate PDF';
     }
   });
 })();
-</script>
-<script>
 function copy(btn){const pre=btn.parentElement.querySelector('pre code');navigator.clipboard.writeText(pre.innerText).then(()=>{btn.textContent='copied';setTimeout(()=>btn.textContent='copy',1500)})}
 const io=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
