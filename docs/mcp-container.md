@@ -54,3 +54,12 @@ specifically requests Glama.
 MCP is pinned to 1.30.0 in this candidate image and client. The base-image tag,
 APT packages and other Python dependencies still follow available releases;
 this is not a fully locked or bit-reproducible build. Do not describe it as such.
+
+On 2026-10-10, candidate commit `198978c16b6d49d07dc5736f16f88a581c9d0e0b`
+passed the [Linux container acceptance run](https://github.com/263311487-ux/imprint-pdf/actions/runs/38040138042).
+That run covers one short English document and the four tools listed above;
+it does not verify all themes, CJK glyph coverage, or any Glama grade.
+
+This is a source-container smoke test, not production or security certification.
+CI uses the local tag `imprint-mcp:ci`; the build example creates the same source
+under `imprint-mcp:source`. Neither tag identifies an immutable released image.
