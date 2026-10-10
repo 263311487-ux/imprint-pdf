@@ -1,0 +1,13 @@
+.git
+.env
+.env.*
+.venv
+**/__pycache__
+.pytest_cache
+.playwright-cli
+output
+outputs
+*.log
+*.pdf
+npm
+demo_server

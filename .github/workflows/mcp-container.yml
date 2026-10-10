@@ -1,0 +1,88 @@
+name: MCP container
+on:
+  push:
+    branches: [main, 'mcp-container-*']
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - imprint/**
+      - pyproject.toml
+      - README.md
+      - LICENSE
+      - .github/workflows/mcp-container.yml
+  pull_request:
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - imprint/**
+      - pyproject.toml
+      - README.md
+      - LICENSE
+      - .github/workflows/mcp-container.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  introspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build source image
+        run: docker build -t imprint-mcp:ci .
+      - name: Install official MCP client
+        run: python -m pip install 'mcp==1.30.0'
+      - name: Exercise the running container over stdio
+        run: |
+          python - <<'PY'
+          import asyncio
+          import json
+          import subprocess
+          from mcp import ClientSession, StdioServerParameters
+          from mcp.client.stdio import stdio_client
+
+          def data(result):
+              assert not result.isError, result
+              if result.structuredContent is not None:
+                  return result.structuredContent
+              texts = [c.text for c in result.content if hasattr(c, 'text')]
+              assert len(texts) == 1, result
+              return json.loads(texts[0])
+
+          async def check():
+              parameters = StdioServerParameters(command='docker', args=[
+                  'run', '--rm', '-i', '--name', 'imprint-check', '--network', 'none', '--cap-drop', 'ALL',
+                  '--security-opt', 'no-new-privileges', 'imprint-mcp:ci'])
+              async with stdio_client(parameters) as (read, write):
+                  async with ClientSession(read, write) as session:
+                      await session.initialize()
+                      tools = await session.list_tools()
+                      names = {t.name for t in tools.tools}
+                      assert names == {'render_markdown', 'list_themes_tool',
+                                       'validate_pdf_tool', 'new_document_tool'}, names
+                      themes = await session.call_tool('list_themes_tool', {})
+                      theme_data = data(themes)
+                      if isinstance(theme_data, dict):
+                          theme_data = theme_data['result']
+                      assert isinstance(theme_data, list) and 'modern' in theme_data
+                      template = await session.call_tool('new_document_tool', {'template': 'report'})
+                      assert not template.isError
+                      subprocess.run(['docker', 'exec', 'imprint-check', 'python', '-c',
+                          "from pathlib import Path; import os; assert os.getuid() != 0; assert len(Path('/work/report.md').read_text()) > 20"], check=True, timeout=10)
+                      pdf = data(await session.call_tool('render_markdown', {
+                          'markdown': '# Container check\n\nA small reproducible document.',
+                          'theme': 'modern'}))
+                      assert isinstance(pdf['pages'], int) and not isinstance(pdf['pages'], bool) and pdf['pages'] >= 1, pdf
+                      assert isinstance(pdf['score'], (int, float)) and not isinstance(pdf['score'], bool) and 0 <= pdf['score'] <= 100, pdf
+                      subprocess.run(['docker', 'exec', 'imprint-check', 'python', '-c',
+                          "import sys, fitz; d=fitz.open(sys.argv[1]); assert len(d)==int(sys.argv[2]); assert 'A small reproducible document.' in ''.join(p.get_text() for p in d)",
+                          pdf['pdf'], str(pdf['pages'])], check=True, timeout=15)
+                      report = data(await session.call_tool('validate_pdf_tool', {'pdf': pdf['pdf']}))
+                      assert isinstance(report['score'], (int, float)) and not isinstance(report['score'], bool) and 0 <= report['score'] <= 100, report
+                      print('Container stdio, four tools and PDF roundtrip passed')
+
+          asyncio.run(asyncio.wait_for(check(), timeout=90))
+          PY

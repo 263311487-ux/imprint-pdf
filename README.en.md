@@ -123,7 +123,7 @@ Every run ends with a quality report:
 - **Missing-glyph detection** — scans for LastResort/notdef fallback (tofu boxes) so symbols like footnote arrows never silently break
 - **Tagged PDF** — requests WeasyPrint PDF/UA-1 output; full conformance requires independent validation
 - **WCAG contrast** — computes selected theme color-pair ratios (body ≥ 7:1, small text ≥ 4.5:1, decoration ≥ 3:1)
-- **AI-native** — one command from the CLI; a built-in MCP server (`imprint-mcp`) lets an agent produce a report from a sentence (tools: render_markdown / list_themes / validate_pdf / new_document)
+- **AI-native** — one command from the CLI; a built-in MCP server (`imprint-mcp`) exposes `render_markdown`, `list_themes_tool`, `validate_pdf_tool`, and `new_document_tool`. See the [stdio container guide](docs/mcp-container.md) for Docker and Glama prerequisites.
 
 ## Quality report (14 checks, 100 points)
 

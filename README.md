@@ -186,7 +186,7 @@ imprint-mcp
 - **代码高亮**：Pygments 着色、整体换页不截断
 - **缺字检测**：渲染后扫描 LastResort/notdef 回退（豆腐块），脚注、箭头等符号缺字自动暴露
 - **带标签 PDF**：默认请求 WeasyPrint PDF/UA-1 输出模式；完整无障碍合规仍需验证
-- **AI 原生**：CLI 一行命令；内置 MCP server（`pip install "imprint-pdf[mcp]"` → `imprint-mcp`），Agent 一句话出报告（tools: render_markdown / list_themes / validate_pdf / new_document）
+- **AI 原生**：CLI 一行命令；内置 MCP server（`pip install "imprint-pdf[mcp]"` → `imprint-mcp`），实际工具名为 `render_markdown`、`list_themes_tool`、`validate_pdf_tool`、`new_document_tool`。Docker 与 Glama 前置步骤见[容器接入说明](docs/mcp-container.md)。
 - **对比度合规**：按主题色板计算 WCAG 对比度比值（正文 ≥7:1、小字 ≥4.5:1、装饰 ≥3:1）
 
 ## 能力边界
