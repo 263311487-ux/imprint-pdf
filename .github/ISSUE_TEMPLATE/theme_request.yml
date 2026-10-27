@@ -1,0 +1,16 @@
+name: Theme request
+description: Request a new theme or report a styling issue
+labels: ["theme"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What kind of theme or styling change?
+      placeholder: "A dark-background theme suitable for technical documentation..."
+    validations:
+      required: true
+  - type: textarea
+    id: reference
+    attributes:
+      label: Visual reference or inspiration (optional)
+      description: Link to a design, color palette, or existing PDF style you like
