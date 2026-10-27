@@ -1,39 +1,45 @@
-# Contributing
+# Contributing to imprint-pdf (印记)
 
-Thanks for considering contributing to Imprint! This is an early project, so
-even small PRs (a theme tweak, a docs fix, a quality-check edge case) are
-highly welcome.
+## Ways to contribute
+
+- **Typography bugs**: incorrect punctuation kinsoku, broken CJK line-break, table header not repeating — include the Markdown source and the quality report output.
+- **New themes**: a theme is a JSON token file in `imprint/themes/`. See existing themes for the schema (color palette, font stack, spacing scale).
+- **Quality report checks**: new checks in the 0–100 report need evidence (what does a pass mean, how is it measured?).
+- **MCP tool improvements**: new tools or parameters for the `imprint-mcp` server.
+- **Platform support**: test results on Windows/macOS/Linux with specific GTK/Pango versions.
 
 ## Development setup
 
 ```bash
-python -m venv .venv
-.venv/bin/pip install -e ".[charts,mcp]" pytest
-.venv/bin/python -m pytest tests/            # must be green
-.venv/bin/python -m imprint examples/sample.md  # expect 100/100 A+
+git clone https://github.com/263311487-ux/imprint-pdf.git
+cd imprint-pdf
+pip install -e ".[charts,mcp]" pytest
+python -m pytest tests/ -q
+python -m imprint examples/sample.md --no-validate
 ```
 
-WeasyPrint needs Pango on your system:
+Requirements: Python 3.10+, WeasyPrint system libs (Pango/GLib — see first-success guide).
 
-- macOS: `brew install pango`
-- Debian/Ubuntu: `sudo apt install libpango-1.0-0 libpangoft2-1.0-0`
-- Windows: install the [GTK3 runtime](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer)
+## Pull request checklist
 
-## Quality gate
+- [ ] `python -m pytest tests/ -q` passes
+- [ ] `python -m imprint examples/sample.md --no-validate` completes without error
+- [ ] New theme: at least one QA screenshot added to `docs/qa/`
+- [ ] New quality check: documented in the commit message with measurement method
+- [ ] No new optional dependencies without justification in `pyproject.toml`
 
-- Every change keeps `pytest` green (CI runs macOS/Linux/Windows × Python 3.10–3.12).
-- Every shipped example PDF must score **100/100 A+** on the built-in report.
-- A theme change must pass the full 22-theme regression (`tests` renders all themes).
-- Prefer evidence over vibes: when you fix a quality-check edge case, add a test.
+## Theme authoring
 
-## Adding a theme
+1. Copy an existing theme JSON from `imprint/themes/`
+2. Adjust tokens (colors in OKLCH or HEX, font stack, spacing)
+3. Run `python -m imprint examples/sample.md --theme your-theme` and verify output
+4. Add a screenshot to `docs/qa/` named `your-theme-01.png`
+5. List the theme in `README.md`'s theme gallery section
 
-1. Add `imprint/themes/<name>.json` following the DTCG-style schema in an existing theme.
-2. Verify contrast: render a sample and check the `contrast` check is 5/5.
-3. Add the keyword signals in `imprint/recommend.py` if the theme has a distinctive mood.
-4. Regenerate a gallery image (`examples/qa/<name>-01.png`) and add it to `README.md`.
+## Quality report contributions
 
-## Code style
-
-- Keep changes minimal and consistent with the existing style.
-- No new dependencies unless there is a real reason; ask first.
+Each check in the 0–100 report needs:
+- A name and point value
+- A measurement method (what to check in the PDF)
+- A pass/fail threshold
+- At least one test case in `tests/`

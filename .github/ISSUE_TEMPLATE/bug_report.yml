@@ -1,0 +1,42 @@
+name: Bug report
+description: Wrong PDF output, quality report error, or CLI crash
+labels: ["bug"]
+body:
+  - type: textarea
+    id: command
+    attributes:
+      label: Command you ran
+      placeholder: "python -m imprint my-doc.md --theme academic"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected output
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual output / error
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: imprint-pdf version
+      placeholder: "0.14.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: ["Ubuntu/Debian", "macOS", "Windows", "Other Linux"]
+    validations:
+      required: true
+  - type: textarea
+    id: markdown
+    attributes:
+      label: Minimal Markdown that reproduces the issue (if applicable)
+      render: markdown
