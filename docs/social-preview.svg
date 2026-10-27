@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <style>text { font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace; }</style>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0a0c12"/>
+      <stop offset="60%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#0f1218"/>
+    </linearGradient>
+    <linearGradient id="score-bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+    <pattern id="dots3" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.7" fill="#ffffff" opacity="0.03"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg3)"/>
+  <rect width="1280" height="640" fill="url(#dots3)"/>
+  <rect x="0" y="0" width="3" height="640" fill="#4facfe" opacity="0.8"/>
+
+  <!-- Tag -->
+  <rect x="64" y="64" width="170" height="28" rx="4" fill="#4facfe" fill-opacity="0.1" stroke="#4facfe" stroke-width="0.5" stroke-opacity="0.4"/>
+  <text x="76" y="82" font-size="11" fill="#4facfe" letter-spacing="2" font-weight="700">PDF · TYPOGRAPHY · MCP</text>
+
+  <!-- Title + Chinese -->
+  <text x="64" y="164" font-size="80" fill="#ffffff" font-weight="700" letter-spacing="-2">imprint</text>
+  <text x="556" y="164" font-size="80" fill="#4facfe" font-weight="300" letter-spacing="-1" opacity="0.7">印记</text>
+
+  <!-- Tagline -->
+  <text x="64" y="210" font-size="22" fill="#e2e8f0" font-weight="400">Markdown in.  Publisher-quality PDF out.</text>
+  <text x="64" y="244" font-size="22" fill="#64748b" font-weight="400">Markdown 进.  出版社级 PDF 出.</text>
+
+  <!-- Pipeline visual -->
+  <line x1="64" y1="274" x2="840" y2="274" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+
+  <!-- Pipeline steps -->
+  <rect x="64" y="288" width="140" height="52" rx="4" fill="#1e293b" stroke="#374151" stroke-width="1"/>
+  <text x="134" y="310" font-size="11" fill="#94a3b8" text-anchor="middle" letter-spacing="0.5">INPUT</text>
+  <text x="134" y="330" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="700">.md</text>
+
+  <text x="218" y="320" font-size="20" fill="#4facfe">→</text>
+
+  <rect x="242" y="288" width="140" height="52" rx="4" fill="#1e293b" stroke="#4facfe" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="312" y="310" font-size="11" fill="#4facfe" text-anchor="middle" letter-spacing="0.5">TYPESET</text>
+  <text x="312" y="330" font-size="13" fill="#94a3b8" text-anchor="middle">WeasyPrint</text>
+
+  <text x="396" y="320" font-size="20" fill="#4facfe">→</text>
+
+  <rect x="420" y="288" width="140" height="52" rx="4" fill="#1e293b" stroke="#374151" stroke-width="1"/>
+  <text x="490" y="310" font-size="11" fill="#94a3b8" text-anchor="middle" letter-spacing="0.5">OUTPUT</text>
+  <text x="490" y="330" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="700">.pdf</text>
+
+  <text x="574" y="320" font-size="20" fill="#4facfe">→</text>
+
+  <rect x="598" y="288" width="160" height="52" rx="4" fill="#1e293b" stroke="#22c55e" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="678" y="310" font-size="11" fill="#22c55e" text-anchor="middle" letter-spacing="0.5">QUALITY REPORT</text>
+  <text x="678" y="330" font-size="16" fill="#22c55e" text-anchor="middle" font-weight="700">0 – 100</text>
+
+  <!-- Score bar -->
+  <text x="64" y="386" font-size="12" fill="#475569" letter-spacing="1">PRINT QUALITY SCORE</text>
+  <rect x="64" y="396" width="720" height="8" rx="4" fill="#1e293b"/>
+  <rect x="64" y="396" width="706" height="8" rx="4" fill="url(#score-bar)"/>
+  <text x="790" y="406" font-size="14" fill="#4facfe" font-weight="700">100</text>
+  <text x="820" y="406" font-size="12" fill="#22c55e">A+</text>
+
+  <!-- Quality check items -->
+  <text x="64" y="434" font-size="12" fill="#22c55e">✓</text>
+  <text x="82" y="434" font-size="12" fill="#64748b">标点避头尾  </text>
+  <text x="202" y="434" font-size="12" fill="#22c55e">✓</text>
+  <text x="220" y="434" font-size="12" fill="#64748b">字体子集嵌入  </text>
+  <text x="366" y="434" font-size="12" fill="#22c55e">✓</text>
+  <text x="384" y="434" font-size="12" fill="#64748b">目录页码  </text>
+  <text x="476" y="434" font-size="12" fill="#22c55e">✓</text>
+  <text x="494" y="434" font-size="12" fill="#64748b">Tagged PDF  </text>
+  <text x="592" y="434" font-size="12" fill="#22c55e">✓</text>
+  <text x="610" y="434" font-size="12" fill="#64748b">孤行控制</text>
+
+  <!-- Theme swatches -->
+  <text x="64" y="468" font-size="12" fill="#475569" letter-spacing="1">24 THEMES</text>
+  <g transform="translate(64,476)">
+    <rect width="40" height="24" rx="2" fill="#1e293b"/><text x="20" y="16" font-size="8" fill="#94a3b8" text-anchor="middle">modern</text>
+    <rect x="48" width="40" height="24" rx="2" fill="#1a1520"/><text x="68" y="16" font-size="8" fill="#a78bfa" text-anchor="middle">nord</text>
+    <rect x="96" width="40" height="24" rx="2" fill="#1c1410"/><text x="116" y="16" font-size="8" fill="#d4a574" text-anchor="middle">sepia</text>
+    <rect x="144" width="40" height="24" rx="2" fill="#1a2030"/><text x="164" y="16" font-size="8" fill="#4facfe" text-anchor="middle">ocean</text>
+    <rect x="192" width="40" height="24" rx="2" fill="#161b16"/><text x="212" y="16" font-size="8" fill="#6ee7b7" text-anchor="middle">jade</text>
+    <rect x="240" width="40" height="24" rx="2" fill="#1c1a10"/><text x="260" y="16" font-size="8" fill="#fbbf24" text-anchor="middle">amber</text>
+    <rect x="288" width="40" height="24" rx="2" fill="#1a1416"/><text x="308" y="16" font-size="8" fill="#f9a8d4" text-anchor="middle">rose</text>
+    <rect x="336" width="40" height="24" rx="2" fill="#0d0d0d"/><text x="356" y="16" font-size="8" fill="#e2e8f0" text-anchor="middle">ink</text>
+    <rect x="384" width="60" height="24" rx="2" fill="#fef9f0" stroke="#e5e7eb" stroke-width="0.5"/>
+    <text x="414" y="16" font-size="8" fill="#dc2626" text-anchor="middle">公文</text>
+    <text x="460" y="16" font-size="11" fill="#475569">+15 more</text>
+  </g>
+
+  <!-- Bottom -->
+  <text x="64" y="568" font-size="12" fill="#475569">pip install imprint-pdf  ·  npx imprint-pdf  ·  MCP server  ·  Python 3.10+</text>
+
+  <!-- RIGHT: Sample page mockup -->
+  <rect x="880" y="80" width="320" height="480" rx="4" fill="#f8f5f0" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Page header -->
+  <rect x="880" y="80" width="320" height="32" rx="4" fill="#e5e7eb"/>
+  <text x="1040" y="100" font-size="10" fill="#9ca3af" text-anchor="middle" font-family="serif">IMPRINT · 印记</text>
+  <!-- Page content lines -->
+  <text x="904" y="136" font-size="13" fill="#1f2937" font-family="serif" font-weight="700">第一章　排版的哲学</text>
+  <rect x="904" y="144" width="272" height="1" fill="#d1d5db"/>
+  <text x="924" y="166" font-size="10" fill="#374151" font-family="serif">　　排版不是装饰，是沟通的基础设施。一份</text>
+  <text x="924" y="182" font-size="10" fill="#374151" font-family="serif">无法被阅读的文档，再精美也是失败的。</text>
+  <text x="924" y="198" font-size="10" fill="#374151" font-family="serif">　　中文排版的核心在于节奏：标点的呼吸，</text>
+  <text x="924" y="214" font-size="10" fill="#374151" font-family="serif">段落的间距，行与行之间的松紧。</text>
+  <!-- Code block -->
+  <rect x="904" y="228" width="272" height="48" rx="2" fill="#f3f4f6"/>
+  <text x="912" y="244" font-size="9" fill="#4b5563" font-family="monospace">$ imprint paper.md --theme academic</text>
+  <text x="912" y="258" font-size="9" fill="#22c55e" font-family="monospace">✓ 总分 100.0/100 · 等级 A+ · 12 页</text>
+  <!-- More content -->
+  <text x="924" y="298" font-size="10" fill="#374151" font-family="serif">　　这就是 Imprint 存在的理由：把 Markdown</text>
+  <text x="924" y="314" font-size="10" fill="#374151" font-family="serif">的简洁与出版物的标准连接起来。</text>
+  <!-- Quality badge -->
+  <rect x="904" y="490" width="272" height="28" rx="2" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.5"/>
+  <text x="1040" y="508" font-size="10" fill="#16a34a" text-anchor="middle">✓ 印刷级质检通过 · A+ · 100/100</text>
+  <!-- Page number -->
+  <text x="1040" y="548" font-size="9" fill="#9ca3af" text-anchor="middle">— 1 —</text>
+</svg>
