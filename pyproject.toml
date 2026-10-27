@@ -9,12 +9,17 @@ description = "AI-native, print-grade Chinese PDF generator: Markdown in, publis
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "Imprint" }]
-keywords = ["pdf", "markdown", "chinese", "typography", "weasyprint", "print"]
+authors = [{ name = "Bai Xing (白星)", email = "263311487@qq.com" }]
+keywords = ["pdf", "markdown", "chinese", "typography", "weasyprint", "print", "publishing", "mcp"]
 classifiers = [
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Topic :: Documentation",
   "Topic :: Printing",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
 ]
 dependencies = [
   "markdown-it-py>=3.0",
@@ -33,6 +38,12 @@ mcp = ["mcp>=1.2,<2.0"]
 [project.scripts]
 imprint = "imprint.cli:main"
 imprint-mcp = "imprint.mcp_server:main"
+
+[project.urls]
+Homepage = "https://github.com/263311487-ux/imprint-pdf"
+Repository = "https://github.com/263311487-ux/imprint-pdf.git"
+Issues = "https://github.com/263311487-ux/imprint-pdf/issues"
+Changelog = "https://github.com/263311487-ux/imprint-pdf/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 packages = ["imprint", "imprint.themes"]
